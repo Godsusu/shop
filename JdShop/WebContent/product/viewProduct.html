@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="GB18030">
+<title>Insert title here</title>
+<style>
+    table,tr,th,td{
+        border:1px solid black;
+        border-collapse: collapse;
+    }
+</style>
+<script src="../js/jquery-3.3.1.js"></script> <!-- 引入jQuery库 -->
+<script src="../js/listProduct.js"></script>
+<script>
+    $(document).ready(function () {
+    $("#search").click(function () {
+        //对后台发送请求
+        $.getJSON("../product?method=viewProduct", function (data) {
+            $.each(data["list"], function (index, obj) {
+                var tr = $("<tr>");//创建一行
+                $.each(obj, function (key, value) {
+                    if (key != 'isJingxuan' && key != 'isRemai' && key != 'isXiajia' && key!='categoryId') {
+                        var tdId = $("<td>").text(value);
+                        tr.append(tdId);
+                    }
+                });
+                $("#productTb").append(tr);
+            });
+        })
+    });
+});
+</script>
+</head>
+<body>
+	<input type="button" value="查询" id="search">
+	<table id="productTb">
+        <tr>
+            <th>商品ID</th>
+            <th>商品名称</th>
+            <th>价格</th>
+            <th>上架日期</th>
+            <th>描述</th>
+            <th>图片</th>
+        </tr>
+		
+    </table>
+</body>
+</html>
