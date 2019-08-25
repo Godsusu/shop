@@ -40,7 +40,7 @@ public class RoleController extends BaseServlet {
 		try {
 			String roleId=request.getParameter("roleId");
 			String permissionIds[]=request.getParameterValues("permissionIds[]");
-			IRoleService roleService=(IRoleService) new TransactionHandle().createProxyObject(new RoleServiceImpl());
+			IRoleService roleService=(IRoleService) new TransactionHandle().createProxyObject((IRoleService) BeanFactory.getInstance().getBean("roleService"));
 			roleService.saveGrant(roleId, permissionIds);
 			System.out.println(permissionIds[0]);
 			response.setContentType("text/plain;charset=GBK");

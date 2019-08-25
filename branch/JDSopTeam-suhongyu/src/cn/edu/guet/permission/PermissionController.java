@@ -99,7 +99,7 @@ public class PermissionController extends BaseServlet {
 			permission.setUrl(url);
 			permission.setPid(pid);
 			
-			IPermissionService permissionService=(IPermissionService) new TransactionHandle().createProxyObject(new PermissionServiceImpl());
+			IPermissionService permissionService=(IPermissionService) new TransactionHandle().createProxyObject((IPermissionService) BeanFactory.getInstance().getBean("permissionService"));
 			permissionService.savePermission(permission);
 			
 			response.setContentType("text/plain;charset=GBK");
@@ -117,7 +117,7 @@ public class PermissionController extends BaseServlet {
 	}
 	
 	public String addPermission(HttpServletRequest request, HttpServletResponse response){
-		IPermissionService permissionService=new PermissionServiceImpl();
+		IPermissionService permissionService=(IPermissionService) BeanFactory.getInstance().getBean("permissionService");
 		List<Permission> pm=permissionService.getAllPermission();
 		request.setAttribute("permissions", pm);
 
@@ -136,7 +136,7 @@ public class PermissionController extends BaseServlet {
 		permission.setIconSkin(pSkin);
 		permission.setUrl(url);
 		
-		IPermissionService permissionService=(IPermissionService) new TransactionHandle().createProxyObject(new PermissionServiceImpl());
+		IPermissionService permissionService=(IPermissionService) new TransactionHandle().createProxyObject((IPermissionService) BeanFactory.getInstance().getBean("permissionService"));
 		try {
 			permissionService.updatePermission(permission);
 		} catch (SQLException e1) {
@@ -159,7 +159,7 @@ public class PermissionController extends BaseServlet {
 		PrintWriter out=null;
 		response.setContentType("text/plain;charset=GBK");
 		String permissionId=request.getParameter("permissionId");
-		IPermissionService permissionService=(IPermissionService) new TransactionHandle().createProxyObject(new PermissionServiceImpl());
+		IPermissionService permissionService=(IPermissionService) new TransactionHandle().createProxyObject((IPermissionService) BeanFactory.getInstance().getBean("permissionService"));
 		try {
 			out=response.getWriter();
 			permissionService.deletePermission(permissionId);

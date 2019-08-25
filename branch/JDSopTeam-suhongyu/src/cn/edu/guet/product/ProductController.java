@@ -58,7 +58,7 @@ public class ProductController extends BaseServlet {
 	public void deleteProduct(HttpServletRequest request, HttpServletResponse response){
 		try {
 			String productId=request.getParameter("productid");
-			IProductService productService=(IProductService) new TransactionHandle().createProxyObject(new ProductServiceImpl());
+			IProductService productService=(IProductService) new TransactionHandle().createProxyObject((IProductService) BeanFactory.getInstance().getBean("productService"));
 			System.out.println(productId);
 			productService.deleteProduct(productId);
 			
@@ -83,7 +83,7 @@ public class ProductController extends BaseServlet {
 			Product product=new Product();
 			Map<String,String[]> map=request.getParameterMap();
 			BeanUtils.populate(product,map);
-			IProductService productService=(IProductService) new TransactionHandle().createProxyObject(new ProductServiceImpl());
+			IProductService productService=(IProductService) new TransactionHandle().createProxyObject((IProductService) BeanFactory.getInstance().getBean("productService"));
 			productService.updateProduct(product);
 			
 			response.setContentType("text/plain;charset=gbk");
@@ -148,7 +148,7 @@ public class ProductController extends BaseServlet {
 				e.printStackTrace();
 			}
 		// 把文件对象的信息存入数据库
-		IProductService productService=(IProductService) new TransactionHandle().createProxyObject(new ProductServiceImpl());
+		IProductService productService=(IProductService) new TransactionHandle().createProxyObject((IProductService) BeanFactory.getInstance().getBean("productService"));
 		try {
 			productService.saveProduct(pro);
 		} catch (DaoException e) {

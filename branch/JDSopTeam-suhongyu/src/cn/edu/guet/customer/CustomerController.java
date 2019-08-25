@@ -79,7 +79,7 @@ public class CustomerController extends BaseServlet {
 				customer.setMailBox(mailBox);
 				customer.setPhone(phone);
 				
-				ICustomerService customerService=(ICustomerService) new TransactionHandle().createProxyObject(new CustomerServiceImpl());
+				ICustomerService customerService=(ICustomerService) new TransactionHandle().createProxyObject((ICustomerService) new TransactionHandle().createProxyObject(new CustomerServiceImpl()));		
 				customerService.savaCustomer(customer);
 				out.write("验证成功");			
 			}

@@ -29,7 +29,7 @@ public class UserController extends BaseServlet {
 	public String deleteUser(HttpServletRequest request, HttpServletResponse response)
 	{
 		String userId=request.getParameter("userId");
-		IUserService userService=(IUserService) new TransactionHandle().createProxyObject(new UserServiceImpl());
+		IUserService userService=(IUserService) new TransactionHandle().createProxyObject(BeanFactory.getInstance().getBean("userService"));
 		try {
 			userService.deleteUser(userId);
 		} catch (DaoException e) {
@@ -45,7 +45,7 @@ public class UserController extends BaseServlet {
 	{
 		String roleId=request.getParameter("roleId");
 		String userId=request.getParameter("userId");
-		IUserService userService=(IUserService) new TransactionHandle().createProxyObject(new UserServiceImpl());
+		IUserService userService=(IUserService) new TransactionHandle().createProxyObject(BeanFactory.getInstance().getBean("userService"));
 		try {
 			userService.grantUser(userId,roleId);
 		} catch (DaoException e) {
@@ -62,7 +62,7 @@ public class UserController extends BaseServlet {
 		String username=request.getParameter("username");
 		request.setAttribute("username", username);
 		request.setAttribute("userId", userId);
-		IRoleService roleService=new RoleServiceImpl();
+		IRoleService roleService=(IRoleService) BeanFactory.getInstance().getBean("roleService");
 		List<Roles> roles=roleService.getAllRole();
 		request.setAttribute("roles", roles);
 		return "user/grantUser.jsp";
@@ -96,7 +96,7 @@ public class UserController extends BaseServlet {
 	public String login(HttpServletRequest request, HttpServletResponse response){		
 			String username=request.getParameter("username");
 			String password=request.getParameter("password");			
-			IUserService userService=new UserServiceImpl();
+			IUserService userService=(IUserService) BeanFactory.getInstance().getBean("userService");
 			Users user=userService.login(username, password);
 			HttpSession session=request.getSession();
 			session.setAttribute("user",user);			
@@ -106,7 +106,7 @@ public class UserController extends BaseServlet {
 	public void getMenu(HttpServletRequest request, HttpServletResponse response){
 		try {
 			String username=request.getParameter("username");
-			IUserService userService=new UserServiceImpl();
+			IUserService userService=(IUserService) BeanFactory.getInstance().getBean("userService");
 			Set<Permission> permission=userService.getPermission(username);	
 			for(Permission per:permission){
 				if(per.getIsParent().equals("true")){
@@ -133,7 +133,7 @@ public class UserController extends BaseServlet {
 		Users user=new Users();
 		user.setUsersId(UUID.randomUUID().toString().replace("-",""));
 		user.setUsername(request.getParameter("username"));
-		IUserService userService=(IUserService) new TransactionHandle().createProxyObject(new UserServiceImpl());
+		IUserService userService=(IUserService) new TransactionHandle().createProxyObject(BeanFactory.getInstance().getBean("userService"));
 		try {
 			userService.saveUser(user);
 		} catch (DaoException e) {
