@@ -13,8 +13,17 @@
 		body{
 			position: relative;
 		}
+		tr{
+			height:30px;
+		}
+		
+		#showTable a{
+			margin-left:13px;
+		}
+		
 		.updatePermissionForm{
-			height:500px;
+			padding-left:80px;
+			height:400px;
 			width:400px;
 			display:none;
 			position:fixed;
@@ -178,10 +187,10 @@
 
 	<div class="updatePermissionForm">
 		<form id="fm">
-			权 限 ID：<input type="text" id="permissionid" name="permissionId" readonly="readonly"/><br>
+			权&nbsp;&nbsp;&nbsp;限ID：<input type="text" id="permissionid" name="permissionId" readonly="readonly"/><br>
 			权限名称：<input type="text" id="pename" name="name" /> <br>
-			皮 肤 ：<input type="text" name="iconSkin" />	<br>
-			u r l：<input type="text" id="purl" name="url" /> <br>
+			皮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 肤 ：<input type="text" name="iconSkin" />	<br>
+			U &nbsp;&nbsp; R &nbsp;&nbsp;L：<input width="190px" type="text" id="purl" name="url" /> <br>
 			<input type="button" value="保存" onclick="updatePermission()" />
 			<input type="button" value="取消" onclick="cancel()" />
 		</form>

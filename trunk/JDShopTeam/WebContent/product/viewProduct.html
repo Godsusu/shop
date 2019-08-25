@@ -8,7 +8,9 @@
 			border:1px solid #CDCDCD;
 			border-collapse:collapse;
 	}
-	
+	.product-info a{
+			margin-left:10px;
+		}
 	
 	
 </style>
@@ -20,7 +22,7 @@
 		height:300px;
 		width:280px;
 		margin-left:550px;
-		margin-top:100px;
+		margin-top:150px;
 		display:none;
 		z-index:4;
 		position:absolute;
@@ -34,10 +36,10 @@
 		height:300px;
 		width:400px;
 		margin-left:500px;
-		margin-top:100px;
+		margin-top:150px;
 		display:none;
 		z-index:4;
-		position:absolute;
+		position:fixed;
 		padding-left:40px;
 		padding-top:50px;
 		border:4px solid #ECF3FE;
@@ -58,38 +60,6 @@
 </head>
 <body>	
 	<div class="bg"></div>
-	<table>
-		<tr>
-			<th width="310px">商品ID</th>
-			<th width="150px">商品名称</th>
-			<th width="70px">价格</th>
-			<th width="100px">上架日期</th>
-			<th width="200px">描述</th>
-			<th width="200px">图片</th>
-			<th width="100px">操作</th>
-		</tr>
-		<tbody class="product-info">
-
-		</tbody>
-	</table>
-	<input type="button" value="查询" class="search-product" />
-	<input type="button" value="添加" class="add-product" />
-	
-	<div class="update-product-info">
-		<form class="update-product-form">
-			<input type="hidden" value="" name="productId" class="udproductid"/>
-			商品名称 <input type="text" value="" name="name" class="udproductname"/><br>
-			<br>
-			价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 格 <input type="text" value="" name="price" class="udproductprice"/><br>
-			<br>
-			描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 述 <input type="text" value="" name="descInfo" class="udproductdesc"/><br>
-			<br>
-			图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 片 <input type="text" value="" name="picurl" class="udproductpic"/><br>
-			<br>
-			<input type="button" class="submit-product-info" value="提交" />
-			<input type="button" value="取消" onclick="cancel()"/>
-		</form>
-	</div>
 	
 	<div class="add-product-info">
 		<form method="POST" action="product?method=addProductInfo" class="new-product-info" enctype="multipart/form-data">
@@ -106,6 +76,39 @@
 			<input type="submit" class="submit-product-info" value="提交" />
 			<input type="button" value="取消" onclick="cancel()"/>
 		</form>
-	</div>	
+	</div>
+	<div class="update-product-info">
+		<form class="update-product-form">
+			<input type="hidden" value="" name="productId" class="udproductid"/>
+			商品名称 <input type="text" value="" name="name" class="udproductname"/><br>
+			<br>
+			价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 格 <input type="text" value="" name="price" class="udproductprice"/><br>
+			<br>
+			描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 述 <input type="text" value="" name="descInfo" class="udproductdesc"/><br>
+			<br>
+			图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 片 <input type="text" value="" name="picurl" class="udproductpic"/><br>
+			<br>
+			<input type="button" class="submit-product-info" value="提交" />
+			<input type="button" value="取消" onclick="cancel()"/>
+		</form>
+	</div>
+	
+	<table>
+		<tr>
+			<th width="310px">商品ID</th>
+			<th width="150px">商品名称</th>
+			<th width="70px">价格</th>
+			<th width="100px">上架日期</th>
+			<th width="200px">描述</th>
+			<th width="100px">图片</th>
+			<th width="100px">操作</th>
+		</tr>
+		<tbody class="product-info">
+
+		</tbody>
+	</table>
+	<input type="button" value="查询" class="search-product" />
+	<input type="button" value="添加" class="add-product" />
+	
 </body>
 </html>

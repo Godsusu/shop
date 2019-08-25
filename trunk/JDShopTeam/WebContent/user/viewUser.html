@@ -6,9 +6,14 @@
 <title>查看用户</title>
 	<style type="text/css">
 		table,tr,th,td{
-			border:1px solid black;
-			border-collapse:collapse;
+			border:2px solid #95B8E6;
+			border-collapse:collapse;	
 		}
+		tr{
+			height:30px;
+		}
+		
+		
 		#locallogo{
 			margin-top:300px;
 			margin-left:600px;
@@ -16,6 +21,15 @@
 			position:fixed;
 			z-index:3;
 		}
+		#wrapper{
+			margin-left:300px;
+			margin-top:10px;
+		}
+		#wrapper a{
+			margin-left:7px;
+		}
+		
+		
 		.bg{display:none;position:fixed;width:100%;height:100%;background:#000;z-index:2;top:0;left:0;opacity:0.4;}
 	</style>
 	<script type="text/javascript">
@@ -72,7 +86,9 @@
             		}
 				}
 			});
+    	   	
        	};
+       	
 	</script>
 	<script>
 		function updateUserInfo(a){
