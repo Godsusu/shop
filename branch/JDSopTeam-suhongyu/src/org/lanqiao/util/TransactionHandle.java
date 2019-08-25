@@ -1,6 +1,7 @@
 package org.lanqiao.util;
 
 import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
@@ -16,11 +17,21 @@ public class TransactionHandle implements InvocationHandler {
 	}
 	
 	@Override
-	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-		Connection conn=DBConnection.getConn();
-		conn.setAutoCommit(false);
-		Object retValue=method.invoke(targetObject, args);
-		conn.commit();
+	public Object invoke(Object proxy, Method method, Object[] args)throws Throwable{
+		Object retValue=null;
+		Connection conn=null;
+		try {
+			conn=DBConnection.getConn();
+			conn.setAutoCommit(false);
+			retValue=method.invoke(targetObject, args);
+			conn.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			if(e instanceof InvocationTargetException){
+				conn.rollback();
+				throw ((InvocationTargetException) e).getTargetException();
+			}
+		} 
 		return retValue;
 	}
 

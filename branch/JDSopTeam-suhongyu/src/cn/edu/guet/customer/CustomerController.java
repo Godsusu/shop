@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.lanqiao.util.SendEmail;
+import org.lanqiao.util.TransactionHandle;
 
+import cn.edu.guet.exception.DaoException;
 import cn.edu.guet.web.servlet.base.BaseServlet;
 
 public class CustomerController extends BaseServlet {
@@ -22,7 +24,6 @@ public class CustomerController extends BaseServlet {
 	}
 	
 	public String customerLogin(HttpServletRequest request, HttpServletResponse response){
-		System.out.println("1111111111111111111111");
 		return "customer/customerLogin.html";
 	}
 	
@@ -78,7 +79,7 @@ public class CustomerController extends BaseServlet {
 				customer.setMailBox(mailBox);
 				customer.setPhone(phone);
 				
-				ICustomerService customerService=new CustomerServiceImpl();
+				ICustomerService customerService=(ICustomerService) new TransactionHandle().createProxyObject(new CustomerServiceImpl());
 				customerService.savaCustomer(customer);
 				out.write("验证成功");			
 			}
@@ -90,6 +91,11 @@ public class CustomerController extends BaseServlet {
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (DaoException e) {
+			/**
+			 * 把错误消息返回界面
+			 */
 			e.printStackTrace();
 		}
 	}

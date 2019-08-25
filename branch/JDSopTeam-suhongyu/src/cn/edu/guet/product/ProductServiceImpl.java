@@ -6,7 +6,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.lanqiao.util.DBConnection;
+import org.lanqiao.util.Dic;
 import org.lanqiao.util.PageModel;
+
+import cn.edu.guet.exception.DaoException;
 
 public class ProductServiceImpl implements IProductService {
 	
@@ -45,58 +48,32 @@ public class ProductServiceImpl implements IProductService {
 	}
 
 	@Override
-	public void deleteProduct(String productId) {
-		Connection conn=null;
+	public void deleteProduct(String productId) throws DaoException {
 		try {
-			conn=DBConnection.getConn();
-			conn.setAutoCommit(false);
 			productDao.delete(productId);
 		} catch (SQLException e) {
 			e.printStackTrace();
-			try {
-				conn.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-		}finally{
-			DBConnection.closeConn();
+			throw new DaoException(Dic.DELETE_FAILED);
 		}
 	}
 
 	@Override
-	public void saveProduct(Product p) {
-		Connection conn=null;
+	public void saveProduct(Product p) throws DaoException {
 		try {
-			conn=DBConnection.getConn();
-			conn.setAutoCommit(false);
 			productDao.save(p);
 		} catch (SQLException e) {
-			try {
-				conn.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
 			e.printStackTrace();
-		}finally{
-			DBConnection.closeConn();
+			throw new DaoException(Dic.SAVE_FAILED);
 		}
 	}
 
 	@Override
-	public void updateProduct(Product product) {
-		Connection conn=null;
+	public void updateProduct(Product product) throws DaoException {
 		try {
-			conn=DBConnection.getConn();
 			productDao.update(product);
 		} catch (SQLException e) {
-			try {
-				conn.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
 			e.printStackTrace();
-		}finally{
-			DBConnection.closeConn();
+			throw new DaoException(Dic.UPDATE_FAILED);
 		}
 	}
 

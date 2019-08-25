@@ -5,7 +5,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.lanqiao.util.DBConnection;
+import org.lanqiao.util.Dic;
 import org.lanqiao.util.PageModel;
+
+import cn.edu.guet.exception.DaoException;
 
 public class PermissionServiceImpl implements IPermissionService {
 	IPermissionDao permissionDao;
@@ -67,70 +70,31 @@ public class PermissionServiceImpl implements IPermissionService {
 	
 	
 	@Override
-	public void savePermission(Permission p) {
-		Connection conn=null;
-		try {
-			conn=DBConnection.getConn();
-			conn.setAutoCommit(false);
+	public void savePermission(Permission p) throws DaoException {		
+		try{
 			permissionDao.save(p);
-			conn.commit();
-		} catch (SQLException e) {
-			try {
-				conn.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			e.printStackTrace();
-		}finally{
-			DBConnection.closeConn();
+		}catch(SQLException e){
+			throw new DaoException(Dic.SAVE_FAILED);
 		}
-		
 	}
 
 	@Override
-	public void deletePermission(String permissionId) {
-		Connection conn=DBConnection.getConn();
+	public void deletePermission(String permissionId) throws DaoException{		
 		try {
-			conn.setAutoCommit(false);
-			permissionDao.deletePermissionChild(permissionId);
-			
+			permissionDao.deletePermissionChild(permissionId);			
 			List<Permission> list=permissionDao.getChildsById(permissionId);
 			for(Permission p:list){
 				permissionDao.deletePermissionChild(p.getPermissionId());
 				permissionDao.delete(p.getPermissionId());
-			}
-			
+			}			
 			permissionDao.delete(permissionId);
-			conn.commit();
 		} catch (SQLException e) {
-			e.printStackTrace();
-			try {
-				conn.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}	
-		}finally{
-			DBConnection.closeConn();
-		}
+			throw new DaoException("É¾³ýÊ§°Ü");
+		}	
 	}
 
 	@Override
-	public void updatePermission(Permission p) {
-		Connection conn=null;
-		try {
-			conn=DBConnection.getConn();
-			conn.setAutoCommit(false);
-			permissionDao.update(p);
-			conn.commit();
-		} catch (SQLException e) {
-			try {
-				conn.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			e.printStackTrace();
-		}finally{
-			DBConnection.closeConn();
-		}		
+	public void updatePermission(Permission p) throws SQLException {
+		permissionDao.update(p);
 	}
 }

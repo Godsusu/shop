@@ -3,9 +3,7 @@ package cn.edu.guet.product;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
@@ -23,9 +21,12 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.lanqiao.util.PageModel;
+import org.lanqiao.util.TransactionHandle;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import cn.edu.guet.exception.DaoException;
 import cn.edu.guet.web.servlet.base.BaseServlet;
 
 public class ProductController extends BaseServlet {
@@ -56,7 +57,7 @@ public class ProductController extends BaseServlet {
 	public void deleteProduct(HttpServletRequest request, HttpServletResponse response){
 		try {
 			String productId=request.getParameter("productid");
-			IProductService productService=new ProductServiceImpl();
+			IProductService productService=(IProductService) new TransactionHandle().createProxyObject(new ProductServiceImpl());
 			System.out.println(productId);
 			productService.deleteProduct(productId);
 			
@@ -67,6 +68,11 @@ public class ProductController extends BaseServlet {
 			out.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (DaoException e) {
+			/**
+			 * 返回信息给界面
+			 */
+			e.printStackTrace();
 		}
 		
 	}
@@ -76,7 +82,7 @@ public class ProductController extends BaseServlet {
 			Product product=new Product();
 			Map<String,String[]> map=request.getParameterMap();
 			BeanUtils.populate(product,map);
-			IProductService productService=new ProductServiceImpl();
+			IProductService productService=(IProductService) new TransactionHandle().createProxyObject(new ProductServiceImpl());
 			productService.updateProduct(product);
 			
 			response.setContentType("text/plain;charset=gbk");
@@ -85,6 +91,11 @@ public class ProductController extends BaseServlet {
 			out.flush();
 			out.close();
 		} catch (IOException | IllegalAccessException | InvocationTargetException e) {
+			e.printStackTrace();
+		} catch (DaoException e) {
+			/**
+			 * 返回信息给界面
+			 */
 			e.printStackTrace();
 		}
 	}
@@ -104,13 +115,10 @@ public class ProductController extends BaseServlet {
 			} catch (FileUploadException e) {
 				e.printStackTrace();
 			}
-			Iterator<FileItem> itr = items.iterator();//items集合中包含了（商品名称、要上传的文件图片）
-			
-			
+			Iterator<FileItem> itr = items.iterator();//items集合中包含了（商品名称、要上传的文件图片）			
 			try {
 				while (itr.hasNext()) {
 					FileItem item = (FileItem) itr.next();
-					// 检查当前项目是普通表单项目还是上传文件。
 					if (item.isFormField()) {// 如果是普通表单项目，显示表单内容。
 						String fieldName = item.getFieldName();
 						if (fieldName.equals("name")) {
@@ -133,21 +141,21 @@ public class ProductController extends BaseServlet {
 						File savedFile = new File(realPath + "\\", fullFile.getName());
 						item.write(savedFile);
 						pro.setPicurl(item.getName());
-						// System.out.println(savedFile.getAbsolutePath());
-						// System.out.println("upload/pic/"+item.getName());
-						//pro.setProductPic(item.getName());
 					}
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		
 		// 把文件对象的信息存入数据库
-		IProductService productService=new ProductServiceImpl();
-		productService.saveProduct(pro);
-			
-			
-			
+		IProductService productService=(IProductService) new TransactionHandle().createProxyObject(new ProductServiceImpl());
+		try {
+			productService.saveProduct(pro);
+		} catch (DaoException e) {
+			/**
+			 * 返回信息给界面
+			 */
+			e.printStackTrace();
+		}		
 		} else {
 			System.out.print("the enctype must be multipart/form-data");
 		}

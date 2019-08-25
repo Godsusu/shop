@@ -5,6 +5,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.lanqiao.util.DBConnection;
+import org.lanqiao.util.Dic;
+
+import cn.edu.guet.exception.DaoException;
 
 
 public class RoleServiceImpl implements IRoleService {
@@ -24,22 +27,12 @@ public class RoleServiceImpl implements IRoleService {
 		return null;
 	}
 	@Override
-	public void saveGrant(String roleId, String[] permissionIds) {
-		Connection conn=null;
+	public void saveGrant(String roleId, String[] permissionIds) throws DaoException {	
 		try {
-			conn=DBConnection.getConn();
-			conn.setAutoCommit(false);		
 			roleDao.saveGrant(roleId, permissionIds);
 		} catch (SQLException e) {
 			e.printStackTrace();
-			try {
-				conn.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-		}
-		finally{
-			DBConnection.closeConn();
+			throw new DaoException(Dic.SAVE_FAILED);
 		}
 	}
 	

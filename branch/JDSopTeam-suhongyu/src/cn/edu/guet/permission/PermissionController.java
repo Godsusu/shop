@@ -2,12 +2,17 @@ package cn.edu.guet.permission;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.lanqiao.util.PageModel;
+import org.lanqiao.util.TransactionHandle;
+
 import com.alibaba.fastjson.JSON;
+
+import cn.edu.guet.exception.DaoException;
 import cn.edu.guet.web.servlet.base.BaseServlet;
 
 /**
@@ -70,7 +75,9 @@ public class PermissionController extends BaseServlet {
 		}
 	}
 	
+	@SuppressWarnings("null")
 	public void savePermission(HttpServletRequest request, HttpServletResponse response){
+		PrintWriter out=null;
 		try {
 			//Map<String,String[]> map=request.getParameterMap();
 			
@@ -91,17 +98,21 @@ public class PermissionController extends BaseServlet {
 			permission.setUrl(url);
 			permission.setPid(pid);
 			
-			IPermissionService permissionService=new PermissionServiceImpl();
+			IPermissionService permissionService=(IPermissionService) new TransactionHandle().createProxyObject(new PermissionServiceImpl());
 			permissionService.savePermission(permission);
 			
 			response.setContentType("text/plain;charset=GBK");
-			PrintWriter out=response.getWriter();
+			out=response.getWriter();
 			out.write("保存成功");
-			out.flush();
-			out.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (DaoException e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			out.write(e.getMessage());
 		}
+		out.flush();
+		out.close();
 	}
 	
 	public String addPermission(HttpServletRequest request, HttpServletResponse response){
@@ -118,16 +129,18 @@ public class PermissionController extends BaseServlet {
 		String pSkin=request.getParameter("iconSkin");
 		String url=request.getParameter("url");
 		
-		
-		
 		Permission permission=new Permission();
 		permission.setPermissionId(permissionid);
 		permission.setName(pname);
 		permission.setIconSkin(pSkin);
 		permission.setUrl(url);
 		
-		IPermissionService permissionService=new PermissionServiceImpl();
-		permissionService.updatePermission(permission);
+		IPermissionService permissionService=(IPermissionService) new TransactionHandle().createProxyObject(new PermissionServiceImpl());
+		try {
+			permissionService.updatePermission(permission);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
 		
 		response.setContentType("text/plain;charset=GBK");
 		PrintWriter out;
@@ -142,18 +155,19 @@ public class PermissionController extends BaseServlet {
 	}
 	
 	public void deletePermission(HttpServletRequest request, HttpServletResponse response){
+		PrintWriter out=null;
+		response.setContentType("text/plain;charset=GBK");
+		String permissionId=request.getParameter("permissionId");
+		IPermissionService permissionService=(IPermissionService) new TransactionHandle().createProxyObject(new PermissionServiceImpl());
 		try {
-			String permissionId=request.getParameter("permissionId");
-			IPermissionService permissionService=new PermissionServiceImpl();
-			//permissionService.deletePermission(permissionId);
-			System.out.println(permissionId);
-			response.setContentType("text/plain;charset=GBK");
-			PrintWriter out=response.getWriter();
-			out.write("删除成功");
-			out.flush();
-			out.close();
-		} catch (IOException e) {
+			out=response.getWriter();
+			permissionService.deletePermission(permissionId);
+			out.write("删除成功");		
+		} catch (Exception e) {
 			e.printStackTrace();
+			out.write(e.getMessage());
 		}
+		out.flush();
+		out.close();
 	}
 }
