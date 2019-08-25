@@ -9,16 +9,14 @@ import org.lanqiao.util.Dic;
 import org.lanqiao.util.PageModel;
 
 import cn.edu.guet.exception.DaoException;
-import cn.edu.guet.ioc.BeanFactory;
 
 public class PermissionServiceImpl implements IPermissionService {
-	IPermissionDao permissionDao;
-	public PermissionServiceImpl(){
-		permissionDao=(IPermissionDao) BeanFactory.getInstance().getBean("permissionDao");
+	IPermissionDao permissionDao;	
+	
+	public void setPermissionDao(IPermissionDao permissionDao) {
+		this.permissionDao = permissionDao;
 	}
-	
-	
-	
+
 	public List<Permission> getAllPermission() {
 		Connection conn=null;
 		try {

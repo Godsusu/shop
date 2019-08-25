@@ -67,4 +67,7 @@
     <servlet-name>BaseServlet</servlet-name>
     <url-pattern>/BaseServlet</url-pattern>
   </servlet-mapping>
+  <listener>
+    <listener-class>cn.edu.guet.listener.BeanInjectListener</listener-class>
+  </listener>
 </web-app>

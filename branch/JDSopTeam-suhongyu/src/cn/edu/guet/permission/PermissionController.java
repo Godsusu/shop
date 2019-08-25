@@ -13,6 +13,7 @@ import org.lanqiao.util.TransactionHandle;
 import com.alibaba.fastjson.JSON;
 
 import cn.edu.guet.exception.DaoException;
+import cn.edu.guet.ioc.BeanFactory;
 import cn.edu.guet.web.servlet.base.BaseServlet;
 
 /**
@@ -59,7 +60,7 @@ public class PermissionController extends BaseServlet {
 			if (currentPage == null) {
 				currentPage = "1";
 			}
-			IPermissionService permissionService=new PermissionServiceImpl();
+			IPermissionService permissionService=(IPermissionService) BeanFactory.getInstance().getBean("permissionService");
 			PageModel<Permission> pm=permissionService.getAll(Integer.parseInt(currentPage));
 			pm.setCurrentPage(Integer.parseInt(currentPage));
 			System.out.println(JSON.toJSONString(pm));
