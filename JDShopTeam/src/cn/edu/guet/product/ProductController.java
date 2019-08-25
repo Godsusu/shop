@@ -32,8 +32,7 @@ public class ProductController extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 	//private static Logger logger=Logger.getLogger(ProductController.class);
 	
-	public String goToProduct(HttpServletRequest request, HttpServletResponse response){
-		
+	public String listProduct(HttpServletRequest request, HttpServletResponse response){
 		return "product/viewProduct.html";
 	}
 	
