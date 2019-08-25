@@ -18,11 +18,15 @@ import cn.edu.guet.roles.Roles;
 public class UserServiceImpl implements IUserService {
 	IUserDao userDao=null;
 	IRoleDao roleDao=null;
-	public UserServiceImpl(){
-		userDao=new UserDaoImpl();
-		roleDao=new RoleDaoImpl();
-	}
 	
+	public void setUserDao(IUserDao userDao) {
+		this.userDao = userDao;
+	}
+
+	public void setRoleDao(IRoleDao roleDao) {
+		this.roleDao = roleDao;
+	}
+
 	@Override
 	public void saveUser(Users user) throws DaoException {
 		try {

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.lanqiao.util.TransactionHandle;
 
 import cn.edu.guet.exception.DaoException;
+import cn.edu.guet.ioc.BeanFactory;
 import cn.edu.guet.web.servlet.base.BaseServlet;
 
 
@@ -19,7 +20,7 @@ public class RoleController extends BaseServlet {
 
 
 	public String viewRole(HttpServletRequest request, HttpServletResponse response){
-		IRoleService roleService=new RoleServiceImpl();
+		IRoleService roleService=(IRoleService) BeanFactory.getInstance().getBean("roleService");
 		List<Roles> roles=roleService.getAllRole();
 		request.setAttribute("roles", roles);
 		return "role/viewRole.jsp";

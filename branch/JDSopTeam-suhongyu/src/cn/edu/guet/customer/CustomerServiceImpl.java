@@ -8,10 +8,13 @@ import cn.edu.guet.exception.DaoException;
 
 public class CustomerServiceImpl implements ICustomerService {
 	ICustomerDao customerDao;
-	public CustomerServiceImpl(){
-		customerDao = new CustomerDaoImpl();
-	}
 	
+	
+	public void setCustomerDao(ICustomerDao customerDao) {
+		this.customerDao = customerDao;
+	}
+
+
 	public void savaCustomer(Customer customer) throws DaoException {
 		try {
 			customerDao.save(customer);

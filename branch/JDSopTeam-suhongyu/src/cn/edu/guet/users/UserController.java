@@ -16,6 +16,7 @@ import org.lanqiao.util.TransactionHandle;
 import com.alibaba.fastjson.JSON;
 
 import cn.edu.guet.exception.DaoException;
+import cn.edu.guet.ioc.BeanFactory;
 import cn.edu.guet.permission.Permission;
 import cn.edu.guet.roles.IRoleService;
 import cn.edu.guet.roles.RoleServiceImpl;
@@ -78,7 +79,7 @@ public class UserController extends BaseServlet {
 			if(currentPage==null){
 				currentPage="1";
 			}
-			IUserService userService=new UserServiceImpl();
+			IUserService userService=(IUserService) BeanFactory.getInstance().getBean("userService");
 			PageModel<Users> pm=userService.getAllUsers(Integer.parseInt(currentPage));
 			pm.setCurrentPage(Integer.parseInt(currentPage));
 			response.setContentType("application/json;charset=GBK");

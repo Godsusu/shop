@@ -12,8 +12,9 @@ import cn.edu.guet.exception.DaoException;
 
 public class RoleServiceImpl implements IRoleService {
 	IRoleDao roleDao;
-	public RoleServiceImpl(){
-		roleDao=new RoleDaoImpl();
+
+	public void setRoleDao(IRoleDao roleDao) {
+		this.roleDao = roleDao;
 	}
 	public List<Roles> getAllRole() {
 		try {

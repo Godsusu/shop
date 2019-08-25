@@ -27,6 +27,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import cn.edu.guet.exception.DaoException;
+import cn.edu.guet.ioc.BeanFactory;
 import cn.edu.guet.web.servlet.base.BaseServlet;
 
 public class ProductController extends BaseServlet {
@@ -42,7 +43,7 @@ public class ProductController extends BaseServlet {
 			Gson gson=new GsonBuilder()
 					.setDateFormat("yyyy-MM-dd")
 					.create();
-			IProductService productService=new ProductServiceImpl();
+			IProductService productService=(IProductService) BeanFactory.getInstance().getBean("productService");
 			PageModel<Product> pm=productService.getAllProduct(1);
 			response.setContentType("application/json;charset=GBK");
 			PrintWriter out=response.getWriter();

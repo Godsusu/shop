@@ -27,6 +27,7 @@ public class BeanFactory {
 			Class c=Class.forName(ele.attributeValue("class"));
 			Object beanObj=c.newInstance();
 			map.put(id,beanObj);
+			
 			String ref="";
 			Object obj=null;
 			List<Element> childElement=ele.elements();
@@ -44,7 +45,7 @@ public class BeanFactory {
 				obj=map.get(ref);
 				Method[] methods=c.getDeclaredMethods();
 				for(Method method:methods){
-					if(method.getName().startsWith("set")){
+					if(method.getName().startsWith("set") && method.getName().toLowerCase().contains(ref.toLowerCase())){
 						method.invoke(beanObj, obj);
 					}
 				}

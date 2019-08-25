@@ -14,10 +14,12 @@ import cn.edu.guet.exception.DaoException;
 public class ProductServiceImpl implements IProductService {
 	
 	private IProductDao productDao;
-	public ProductServiceImpl(){
-		productDao=new ProductDaoImpl();
-	}
 	
+	
+	public void setProductDao(IProductDao productDao) {
+		this.productDao = productDao;
+	}
+
 	public PageModel<Product> getAllProduct(int currentPage) {
 		Connection conn=null;
 		try {

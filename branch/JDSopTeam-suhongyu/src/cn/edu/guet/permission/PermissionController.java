@@ -24,7 +24,7 @@ public class PermissionController extends BaseServlet {
 
 	public void getAllPermission(HttpServletRequest request, HttpServletResponse response){
 		try {
-			IPermissionService permissionService=new PermissionServiceImpl();
+			IPermissionService permissionService=(IPermissionService) BeanFactory.getInstance().getBean("permissionService");
 			List<Permission> allPermissions=permissionService.getAllPermission();		
 			String roleId=request.getParameter("roleId");
 			List<Permission> ownedPermissions=permissionService.getPermissionById(roleId);
