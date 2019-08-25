@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<bean id="permissionService" class="cn.edu.guet.permission.PermissionServiceImpl">
+		<property name="permissionDao" value="permissionDao"></property>
+	</bean>
+	<bean id="permissionDao" class="cn.edu.guet.permission.PermissionDaoImpl"></bean>
+</beans>

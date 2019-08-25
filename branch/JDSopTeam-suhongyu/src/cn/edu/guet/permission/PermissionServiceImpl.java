@@ -9,12 +9,15 @@ import org.lanqiao.util.Dic;
 import org.lanqiao.util.PageModel;
 
 import cn.edu.guet.exception.DaoException;
+import cn.edu.guet.ioc.BeanFactory;
 
 public class PermissionServiceImpl implements IPermissionService {
 	IPermissionDao permissionDao;
 	public PermissionServiceImpl(){
-		permissionDao=new PermissionDaoImpl();
+		permissionDao=(IPermissionDao) BeanFactory.getInstance().getBean("permissionDao");
 	}
+	
+	
 	
 	public List<Permission> getAllPermission() {
 		Connection conn=null;
@@ -29,6 +32,7 @@ public class PermissionServiceImpl implements IPermissionService {
 		}
 		return null;
 	}
+	
 	public List<Permission> getPermissionById(String roleId) {
 		Connection conn=null;
 		try {
@@ -65,9 +69,7 @@ public class PermissionServiceImpl implements IPermissionService {
 			DBConnection.closeConn();
 		}
 		return null;
-	}
-
-	
+	}	
 	
 	@Override
 	public void savePermission(Permission p) throws DaoException {		
