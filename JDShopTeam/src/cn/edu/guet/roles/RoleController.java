@@ -57,4 +57,9 @@ public class RoleController extends BaseServlet {
 			e.printStackTrace();
 		}
 	}
+	
+	public void addRole(HttpServletRequest request, HttpServletResponse response){
+		System.out.println("111111111");
+	}
+	
 }
