@@ -101,7 +101,7 @@ public class ProductController extends BaseServlet {
 		}
 	}
 	
-	public void addProductInfo(HttpServletRequest request, HttpServletResponse response){
+	public String addProductInfo(HttpServletRequest request, HttpServletResponse response){
 		String realPath = this.getServletContext().getRealPath("/upload");
 		Product pro=new Product();
 		pro.setProductId(UUID.randomUUID().toString().replace("-", ""));
@@ -160,5 +160,6 @@ public class ProductController extends BaseServlet {
 		} else {
 			System.out.print("the enctype must be multipart/form-data");
 		}
+		return "product/viewProduct.html";
 	}
 }
