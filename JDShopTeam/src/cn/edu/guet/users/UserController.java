@@ -11,9 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.lanqiao.util.PageModel;
+import org.lanqiao.util.TransactionHandle;
 
 import com.alibaba.fastjson.JSON;
 
+import cn.edu.guet.exception.DaoException;
+import cn.edu.guet.ioc.BeanFactory;
 import cn.edu.guet.permission.Permission;
 import cn.edu.guet.roles.IRoleService;
 import cn.edu.guet.roles.RoleServiceImpl;
@@ -26,8 +29,15 @@ public class UserController extends BaseServlet {
 	public String deleteUser(HttpServletRequest request, HttpServletResponse response)
 	{
 		String userId=request.getParameter("userId");
-		IUserService userService=new UserServiceImpl();
-		userService.deleteUser(userId);
+		IUserService userService=(IUserService) new TransactionHandle().createProxyObject(BeanFactory.getInstance().getBean("userService"));
+		try {
+			userService.deleteUser(userId);
+		} catch (DaoException e) {
+			/**
+			 * 返回错误信息
+			 */
+			e.printStackTrace();
+		}
 		return "user?method=viewUser";
 	}
 	
@@ -35,8 +45,15 @@ public class UserController extends BaseServlet {
 	{
 		String roleId=request.getParameter("roleId");
 		String userId=request.getParameter("userId");
-		IUserService userService=new UserServiceImpl();
-		userService.grantUser(userId,roleId);
+		IUserService userService=(IUserService) new TransactionHandle().createProxyObject(BeanFactory.getInstance().getBean("userService"));
+		try {
+			userService.grantUser(userId,roleId);
+		} catch (DaoException e) {
+			/**
+			 * 返回错误信息
+			 */
+			e.printStackTrace();
+		}
 		
 		return "user?method=viewUser";
 	}
@@ -45,7 +62,7 @@ public class UserController extends BaseServlet {
 		String username=request.getParameter("username");
 		request.setAttribute("username", username);
 		request.setAttribute("userId", userId);
-		IRoleService roleService=new RoleServiceImpl();
+		IRoleService roleService=(IRoleService) BeanFactory.getInstance().getBean("roleService");
 		List<Roles> roles=roleService.getAllRole();
 		request.setAttribute("roles", roles);
 		return "user/grantUser.jsp";
@@ -62,7 +79,7 @@ public class UserController extends BaseServlet {
 			if(currentPage==null){
 				currentPage="1";
 			}
-			IUserService userService=new UserServiceImpl();
+			IUserService userService=(IUserService) BeanFactory.getInstance().getBean("userService");
 			PageModel<Users> pm=userService.getAllUsers(Integer.parseInt(currentPage));
 			pm.setCurrentPage(Integer.parseInt(currentPage));
 			response.setContentType("application/json;charset=GBK");
@@ -79,7 +96,7 @@ public class UserController extends BaseServlet {
 	public String login(HttpServletRequest request, HttpServletResponse response){		
 			String username=request.getParameter("username");
 			String password=request.getParameter("password");			
-			IUserService userService=new UserServiceImpl();
+			IUserService userService=(IUserService) BeanFactory.getInstance().getBean("userService");
 			Users user=userService.login(username, password);
 			HttpSession session=request.getSession();
 			session.setAttribute("user",user);			
@@ -89,7 +106,7 @@ public class UserController extends BaseServlet {
 	public void getMenu(HttpServletRequest request, HttpServletResponse response){
 		try {
 			String username=request.getParameter("username");
-			IUserService userService=new UserServiceImpl();
+			IUserService userService=(IUserService) BeanFactory.getInstance().getBean("userService");
 			Set<Permission> permission=userService.getPermission(username);	
 			for(Permission per:permission){
 				if(per.getIsParent().equals("true")){
@@ -116,8 +133,15 @@ public class UserController extends BaseServlet {
 		Users user=new Users();
 		user.setUsersId(UUID.randomUUID().toString().replace("-",""));
 		user.setUsername(request.getParameter("username"));
-		IUserService userService=new UserServiceImpl();
-		userService.saveUser(user);
+		IUserService userService=(IUserService) new TransactionHandle().createProxyObject(BeanFactory.getInstance().getBean("userService"));
+		try {
+			userService.saveUser(user);
+		} catch (DaoException e) {
+			/**
+			 * 返回错误信息
+			 */
+			e.printStackTrace();
+		}
 		return "user?method=viewUser";
 	}
 	
