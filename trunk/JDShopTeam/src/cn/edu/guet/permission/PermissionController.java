@@ -76,9 +76,9 @@ public class PermissionController extends BaseServlet {
 		}
 	}
 	
-	@SuppressWarnings("null")
 	public void savePermission(HttpServletRequest request, HttpServletResponse response){
 		PrintWriter out=null;
+		response.setContentType("text/plain;charset=GBK");
 		try {
 			//Map<String,String[]> map=request.getParameterMap();
 			
@@ -100,9 +100,7 @@ public class PermissionController extends BaseServlet {
 			permission.setPid(pid);
 			
 			IPermissionService permissionService=(IPermissionService) new TransactionHandle().createProxyObject((IPermissionService) BeanFactory.getInstance().getBean("permissionService"));
-			permissionService.savePermission(permission);
-			
-			response.setContentType("text/plain;charset=GBK");
+			permissionService.savePermission(permission);	
 			out=response.getWriter();
 			out.write("保存成功");
 		} catch (IOException e) {
@@ -110,7 +108,12 @@ public class PermissionController extends BaseServlet {
 		} catch (DaoException e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
-			out.write(e.getMessage());
+			try {
+				out=response.getWriter();
+				out.write(e.getMessage());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 		out.flush();
 		out.close();
@@ -141,8 +144,7 @@ public class PermissionController extends BaseServlet {
 			permissionService.updatePermission(permission);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
-		}
-		
+		}	
 		response.setContentType("text/plain;charset=GBK");
 		PrintWriter out;
 		try {
@@ -166,7 +168,12 @@ public class PermissionController extends BaseServlet {
 			out.write("删除成功");		
 		} catch (Exception e) {
 			e.printStackTrace();
-			out.write(e.getMessage());
+			try {
+				out=response.getWriter();
+				out.write(e.getMessage());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 		out.flush();
 		out.close();
