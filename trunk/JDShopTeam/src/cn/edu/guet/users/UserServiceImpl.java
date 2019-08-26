@@ -6,41 +6,34 @@ import java.util.List;
 import java.util.Set;
 
 import org.lanqiao.util.DBConnection;
+import org.lanqiao.util.Dic;
 import org.lanqiao.util.PageModel;
 
+import cn.edu.guet.exception.DaoException;
 import cn.edu.guet.permission.Permission;
 import cn.edu.guet.roles.IRoleDao;
 import cn.edu.guet.roles.RoleDaoImpl;
 import cn.edu.guet.roles.Roles;
 
-
-
 public class UserServiceImpl implements IUserService {
 	IUserDao userDao=null;
 	IRoleDao roleDao=null;
-	public UserServiceImpl(){
-		userDao=new UserDaoImpl();
-		roleDao=new RoleDaoImpl();
+	
+	public void setUserDao(IUserDao userDao) {
+		this.userDao = userDao;
 	}
+
+	public void setRoleDao(IRoleDao roleDao) {
+		this.roleDao = roleDao;
+	}
+
 	@Override
-	public void saveUser(Users user) {
-		Connection conn=null;
+	public void saveUser(Users user) throws DaoException {
 		try {
-			conn=DBConnection.getConn();
-			conn.setAutoCommit(false);
 			userDao.save(user);
-			conn.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			try {
-				conn.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			
-		}
-		finally{
-			DBConnection.closeConn();
+			throw new DaoException(Dic.SAVE_FAILED);
 		}
 	}
 
@@ -56,14 +49,12 @@ public class UserServiceImpl implements IUserService {
 		}finally{
 			DBConnection.closeConn();
 		}
-		
 		return user;
 	}
 	
 	@Override
 	public Set<Permission> getPermission(String username) {
 		Connection conn=null;
-		
 		try {
 			conn=DBConnection.getConn();
 			Set<Permission> set=userDao.getPermission(username);
@@ -99,42 +90,24 @@ public class UserServiceImpl implements IUserService {
 		}
 		return null;
 	}
-	public void grantUser(String userId,String roleId){
-		Connection conn=null;
+	
+	public void grantUser(String userId,String roleId) throws DaoException{
 		try {
-			conn=DBConnection.getConn();
-			conn.setAutoCommit(false);
 			userDao.grantUser(userId, roleId);
-			conn.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			try {
-				conn.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-		}finally{
-			DBConnection.closeConn();
+			throw new DaoException("ÊÚÈ¨Ê§°Ü");
 		}
 	}
+	
 	@Override
-	public void deleteUser(String userId) {
-		Connection conn=null;
+	public void deleteUser(String userId) throws DaoException {
 		try {
-			conn=DBConnection.getConn();
-			conn.setAutoCommit(false);
 			userDao.delete(userId);
-			conn.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			try {
-				conn.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-		}finally{
-			DBConnection.closeConn();
-		}	
+			throw new DaoException(Dic.DELETE_FAILED);
+		}
 	}
 
 }

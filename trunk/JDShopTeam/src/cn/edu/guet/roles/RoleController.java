@@ -8,6 +8,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.lanqiao.util.TransactionHandle;
+
+import cn.edu.guet.exception.DaoException;
+import cn.edu.guet.ioc.BeanFactory;
 import cn.edu.guet.web.servlet.base.BaseServlet;
 
 
@@ -16,7 +20,7 @@ public class RoleController extends BaseServlet {
 
 
 	public String viewRole(HttpServletRequest request, HttpServletResponse response){
-		IRoleService roleService=new RoleServiceImpl();
+		IRoleService roleService=(IRoleService) BeanFactory.getInstance().getBean("roleService");
 		List<Roles> roles=roleService.getAllRole();
 		request.setAttribute("roles", roles);
 		return "role/viewRole.jsp";
@@ -36,7 +40,7 @@ public class RoleController extends BaseServlet {
 		try {
 			String roleId=request.getParameter("roleId");
 			String permissionIds[]=request.getParameterValues("permissionIds[]");
-			IRoleService roleService=new RoleServiceImpl();
+			IRoleService roleService=(IRoleService) new TransactionHandle().createProxyObject((IRoleService) BeanFactory.getInstance().getBean("roleService"));
 			roleService.saveGrant(roleId, permissionIds);
 			System.out.println(permissionIds[0]);
 			response.setContentType("text/plain;charset=GBK");
@@ -45,6 +49,11 @@ public class RoleController extends BaseServlet {
 			out.flush();
 			out.close();
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (DaoException e) {
+			/**
+			 * ∑µªÿ–≈œ¢
+			 */
 			e.printStackTrace();
 		}
 	}
