@@ -37,25 +37,29 @@ public class RoleController extends BaseServlet {
 	}
 	
 	public void saveGrant(HttpServletRequest request, HttpServletResponse response){
+		PrintWriter out=null;
+		response.setContentType("text/plain;charset=GBK");
 		try {
 			String roleId=request.getParameter("roleId");
 			String permissionIds[]=request.getParameterValues("permissionIds[]");
 			IRoleService roleService=(IRoleService) new TransactionHandle().createProxyObject((IRoleService) BeanFactory.getInstance().getBean("roleService"));
 			roleService.saveGrant(roleId, permissionIds);
 			System.out.println(permissionIds[0]);
-			response.setContentType("text/plain;charset=GBK");
-			PrintWriter out=response.getWriter();
+			out=response.getWriter();
 			out.write("授权成功,请重新登录");
-			out.flush();
-			out.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (DaoException e) {
-			/**
-			 * 返回信息
-			 */
+			try {
+				out=response.getWriter();
+				out.write(e.getMessage());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		}
+		out.flush();
+		out.close();
 	}
 	
 	public void addRole(HttpServletRequest request, HttpServletResponse response){

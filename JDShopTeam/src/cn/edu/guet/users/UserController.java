@@ -19,7 +19,6 @@ import cn.edu.guet.exception.DaoException;
 import cn.edu.guet.ioc.BeanFactory;
 import cn.edu.guet.permission.Permission;
 import cn.edu.guet.roles.IRoleService;
-import cn.edu.guet.roles.RoleServiceImpl;
 import cn.edu.guet.roles.Roles;
 import cn.edu.guet.web.servlet.base.BaseServlet;
 

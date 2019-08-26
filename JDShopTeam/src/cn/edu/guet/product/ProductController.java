@@ -56,49 +56,54 @@ public class ProductController extends BaseServlet {
 	}
 	
 	public void deleteProduct(HttpServletRequest request, HttpServletResponse response){
+		response.setContentType("text/plain;charset=gbk");
+		PrintWriter out=null;
 		try {
 			String productId=request.getParameter("productid");
 			IProductService productService=(IProductService) new TransactionHandle().createProxyObject((IProductService) BeanFactory.getInstance().getBean("productService"));
 			System.out.println(productId);
 			productService.deleteProduct(productId);
-			
-			response.setContentType("text/plain;charset=gbk");
-			PrintWriter out=response.getWriter();
+			out=response.getWriter();
 			out.write("删除成功");
-			out.flush();
-			out.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (DaoException e) {
-			/**
-			 * 返回信息给界面
-			 */
 			e.printStackTrace();
+			try {
+				out=response.getWriter();
+				out.write(e.getMessage());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
-		
+		out.flush();
+		out.close();
 	}
 	
 	public void updateProductInfo(HttpServletRequest request, HttpServletResponse response){
+		PrintWriter out=null;
+		response.setContentType("text/plain;charset=gbk");
 		try {
 			Product product=new Product();
 			Map<String,String[]> map=request.getParameterMap();
 			BeanUtils.populate(product,map);
 			IProductService productService=(IProductService) new TransactionHandle().createProxyObject((IProductService) BeanFactory.getInstance().getBean("productService"));
-			productService.updateProduct(product);
-			
-			response.setContentType("text/plain;charset=gbk");
-			PrintWriter out=response.getWriter();
+			productService.updateProduct(product);			
+			out=response.getWriter();
 			out.write("修改成功");
-			out.flush();
-			out.close();
 		} catch (IOException | IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 		} catch (DaoException e) {
-			/**
-			 * 返回信息给界面
-			 */
 			e.printStackTrace();
+			try {
+				out=response.getWriter();
+				out.write(e.getMessage());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
+		out.flush();
+		out.close();
 	}
 	
 	public String addProductInfo(HttpServletRequest request, HttpServletResponse response){
@@ -137,7 +142,6 @@ public class ProductController extends BaseServlet {
 						}
 					} else {// 如果是上传文件，显示文件名。
 						File fullFile = new File(item.getName());
-						
 						System.out.println("上传的文件名："+item.getName());
 						File savedFile = new File(realPath + "\\", fullFile.getName());
 						item.write(savedFile);

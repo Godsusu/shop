@@ -12,7 +12,6 @@ import org.lanqiao.util.PageModel;
 import cn.edu.guet.exception.DaoException;
 import cn.edu.guet.permission.Permission;
 import cn.edu.guet.roles.IRoleDao;
-import cn.edu.guet.roles.RoleDaoImpl;
 import cn.edu.guet.roles.Roles;
 
 public class UserServiceImpl implements IUserService {
