@@ -23,6 +23,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.lanqiao.util.PageModel;
 import org.lanqiao.util.TransactionHandle;
 
+import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -166,4 +167,20 @@ public class ProductController extends BaseServlet {
 		}
 		return "product/viewProduct.html";
 	}
+	
+	public void viewOneProduct(HttpServletRequest request, HttpServletResponse response){
+		PrintWriter out=null;
+		response.setContentType("text/plain;charset=gbk");
+		try {
+			String productId="ed976bcbcf2f4f06a1111013b2434147";
+			IProductService productService=(IProductService) BeanFactory.getInstance().getBean("productService");
+			Product product=productService.getOneProduct(productId);
+			System.out.println(JSON.toJSONString(product));
+		} catch (DaoException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
 }

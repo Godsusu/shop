@@ -10,4 +10,5 @@ public interface IProductService {
 	void deleteProduct(String productId) throws DaoException;
 	void saveProduct(Product p) throws DaoException;
 	void updateProduct(Product product) throws DaoException;
+	Product getOneProduct(String productId) throws DaoException;
 }
