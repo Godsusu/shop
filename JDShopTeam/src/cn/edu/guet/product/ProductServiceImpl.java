@@ -79,4 +79,16 @@ public class ProductServiceImpl implements IProductService {
 		}
 	}
 
+	@Override
+	public Product getOneProduct(String productId) throws DaoException {
+		Product product=new Product();
+		try {
+			product=productDao.getById(productId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DaoException(Dic.QUERY_FAILED);
+		}
+		return product;
+	}
+
 }
