@@ -207,6 +207,12 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
 					else if(type.indexOf("Int")!=-1) {
 						method.invoke(t, rs.getInt(method.getName().substring(3).toLowerCase()));
 					}
+					else if(type.indexOf("Float")!=-1) {
+						method.invoke(t, rs.getFloat(method.getName().substring(3).toLowerCase()));
+					}
+					else if(type.indexOf("Date")!=-1) {
+						method.invoke(t,rs.getDate(method.getName().substring(3).toLowerCase()));
+					}
 				}
 			}
 			pstmt.close();
