@@ -2,6 +2,7 @@ package cn.edu.guet.customer;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import org.lanqiao.util.SendEmail;
 import org.lanqiao.util.TransactionHandle;
 
 import cn.edu.guet.exception.DaoException;
+import cn.edu.guet.ioc.BeanFactory;
 import cn.edu.guet.web.servlet.base.BaseServlet;
 
 public class CustomerController extends BaseServlet {
@@ -99,5 +101,17 @@ public class CustomerController extends BaseServlet {
 			e.printStackTrace();
 		}
 	}
+	public void selectCustomer(HttpServletRequest request, HttpServletResponse response){  //判断邮箱验证码是否正确以及注册
+		String id="0dd142a4992147a99dd93013908cefb5";
+		try {
+			ICustomerService customerService=(ICustomerService) BeanFactory.getInstance().getBean("customerService");
+			Customer customer=customerService.selectCustomer(id);
+			
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	
 }

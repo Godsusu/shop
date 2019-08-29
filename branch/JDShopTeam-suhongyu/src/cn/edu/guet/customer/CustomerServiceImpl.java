@@ -10,6 +10,7 @@ public class CustomerServiceImpl implements ICustomerService {
 	ICustomerDao customerDao;
 	
 	
+	
 	public void setCustomerDao(ICustomerDao customerDao) {
 		this.customerDao = customerDao;
 	}
@@ -22,5 +23,13 @@ public class CustomerServiceImpl implements ICustomerService {
 			throw new DaoException(Dic.SAVE_FAILED);
 		}
 	}
-	
+	public Customer selectCustomer(String id) throws DaoException{
+		Customer customer=null;
+		try {
+			customer=customerDao.getById(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return customer;
+	}
 }

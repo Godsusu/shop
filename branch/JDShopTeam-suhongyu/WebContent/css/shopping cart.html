@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="GBK">
+    <title>京东购物车</title>
+	<link rel="stylesheet" type="text/css" href="./css/shopping.css">
+	<script>
+		function changepicture(){
+			document.getElementById("picture1").src="images/5.jpg";
+			document.getElementById("picture2").src="images/6.jpg";
+			document.getElementById("picture3").src="images/7.jpg";
+			document.getElementById("picture4").src="images/8.jpg";
+		}
+
+		
+	</script>
+
+	<style>
+		.search{
+		width: 580px;
+		height: 32px;
+		float: left;
+		}
+		.input_text{
+		width: 270px;
+		height: 23px;
+		border: 2px solid red;
+		padding: 0px;
+		float: left;
+		}
+		.input_sub1{
+		width: 55px;
+		height: 27px;
+		border:none;	
+		padding: 0px;
+		float: left;
+		background-color:#B61D1D; 
+		}
+		.input_sub2{
+		width: 60px;
+		height: 30px;
+		border:none;
+		background-color:rgb(70,78,92); 
+		padding: 0px;
+		float: left;
+		}
+	
+
+	</style>
+</head>
+<body>
+	<div class="topwindow">
+		<div class="topleft">
+			<a href="#">京东首页</a>&nbsp;&nbsp;<a href="#">广西</a>
+		</div>
+		<div class="topright">
+			<a href="#">你好，请登录</a>&nbsp;<a href="javascript:regist();" style="color: red">免费注册</a>&nbsp;&nbsp;
+			<a href="#">我的订单</a>&nbsp;|&nbsp;
+			<a href="#">客户服务</a>&nbsp;|&nbsp;
+			<a href="#">手机京东</a>&nbsp;&nbsp;
+		</div>
+		<br>&nbsp;
+	</div>
+
+    <div class="title">
+        <div class="jdgwc">
+        <a href="#"><img src="images/jd.jpg"></a>
+        </div>
+   
+		<div class="form">
+			<form class="search">
+				<input type="text" class="input_text" placeholder="自营">
+				<input type="submit" value="搜索" style="color: white" class="input_sub1">
+			</form>
+		</div>
+    </div>
+    
+    <div class="none">
+         <h4><span>购物车内暂时没有商品，登录后将显示您之前加入的商品</span></h4>
+    </div>
+
+    <div class="login">
+            <form action="接收购物的程序" method="GET">
+                    <input type="submit" value="登录" style="color: white" class="input_sub1">
+                    <a href="#">去购物<</a></p>
+                </form>
+	</div>
+
+	<div class="down">
+		<div class="guessWYL">
+			<a href="#">猜你喜欢</a>
+			</div>
+
+			<div class="buy" onmouseover="changepicture()">
+				<a href="#">随手购</a>
+			</div>
+		</div>
+	</div>
+
+			<div class="gs1" style="border: 1px dashed;width:220px;height:260px">
+				<li><a href="#"><img id="picture1" src="images/1.jpg"></a></li>
+				<li><br>伊利 纯牛奶250ml*24盒<br></li>
+				<a href="#">￥61.70</a>
+			</div>
+		</div>
+
+			<div class="gouwuche1">
+					<a href="#">加入购物车</a>
+				</div>
+
+			<div class="gs2" style="border: 1px dashed;width:220px;height:260px">
+				<li><a href="#"><img id="picture2" src="images/2.jpg"></a></li>
+				<li><br>妮爱情侣项链男女一对S925纯银<br></li>
+				<a href="#">￥198.00</a>
+			</div>
+
+			<div class="gouwuche2">
+					<a href="#">加入购物车</a>
+				</div>
+
+			<div class="gs3" style="border: 1px dashed;width:220px;height:260px">
+				<li><a href="#"><img id="picture3" src="images/3.jpg"></a></li>
+				<li><br>360随身WiFi3 300M<br></li>
+				<a href="#">￥24.90</a>
+			</div>
+
+			<div class="gouwuche3">
+					<a href="#">加入购物车</a>
+				</div>
+			
+			<div class="gs4" style="border: 1px dashed;width:220px;height:260px">
+				<li><a href="#"><img id="picture4" src="images/4.jpg"></a>
+				<li><br>乐事（Lay’s）无限薯片<br></li>
+				<a href="#">￥19.9</a>	
+			</div>
+
+			<div class="gouwuche4">
+					<a href="#">加入购物车</a>
+				</div>
+
+		</div>
+
+	
+
+		
+
+				
+</body>
+</html>

@@ -1,0 +1,340 @@
+  <html>
+
+  <head>
+  <meta charset="UTF-8">
+  <title>jdShoppingCart</title>
+  <link rel="stylesheet" type="text/css" href="./css/main.css">
+  <script src="../js/jquery-3.3.1.js"></script>
+  <script>
+    function showotherinfo(a)
+    {
+      var i=1;
+      for(i=1;i<=8;i++){
+        document.getElementById("rece"+i).src="iamge/list/recc"+a+"-"+i+".jpg";
+
+      }
+    }
+    
+    $(function(){
+    	var url=window.location.href;
+		var productid=url.split("&")[0].split("=")[1];
+		var productnumber=url.split("=")[2];
+		$.ajax({
+			url:"../product?method=viewOneProduct&productId="+productid,
+			dataType:"JSON",
+			success:function(data){
+				$("#productpic").attr("src","../upload/"+data.picurl);
+				$(".info").text(data.descInfo);
+				$(".number").text("数量"+productnumber);
+			}
+		})
+    })
+    $(function(){
+    	$(".btn").click(function(){
+    		window.location.href="../shoppingcart/shop.html";
+    	})
+    	
+    })
+    
+    $(function(){
+   		var url=window.location.href;
+		var productid=url.split("&")[0].split("=")[1];
+		var productnumber=url.split("=")[2];
+		$.ajax({
+			url:"../shopping?method=addToShoppingCart&productId="+productid+"&productNumber="+productnumber,
+			type:"POST",
+			dataType:"JSON",
+			async:false,
+			success:function(){
+				
+			}
+		});
+    });
+
+  </script>
+  </head>
+  <body>
+  <div id="topwindow">
+    <div id="userinfo">
+      <ul>
+        <li><a href="#"> 我的订单</a></li>
+        <li><a href="#"> 我的京东</a></li>
+        <li><a href="#"> 京东会员</a></li>
+        <li><a href="#"> 企业采购</a></li>
+        <li><a href="#"> 客户服务</a></li>
+        <li><a href="#"> 网站导航</a></li>
+        <li><a href="#"> 手机京东</a></li>
+        <li><a href="#"> 你好请登陆</a></li>
+        <li><a href="#"> 免费注册</a></li>
+      </ul>
+      <br>
+    </div>
+    <div id="searchwindow">
+      <img src="image\shoppingcart.png" alt="jdg" width="300" height="110" id="jddog"/>
+      <div id="search">
+        <form>
+          <p><input type="text" class="searchtext"></p>
+          <p><input type="button" class="btn" value="搜索"></p>    
+        </form>
+        <ul>
+            <li><a href="#">我的购物车🛒</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="shoppingcart">
+      <div id=shoppingcart1>
+          <ul>
+              <li><a href="#"> 全部商品分类</a></li>
+              <li><a href="#"> 京东时尚</a></li>
+              <li><a href="#"> 美妆馆</a></li>
+              <li><a href="#"> 超市</a></li>
+              <li><a href="#"> 生鲜</a></li>
+              <li><a href="#"> 海囤全球</a></li>
+              <li><a href="#"> 闪购</a></li>
+              <li><a href="#"> 拍卖</a></li>
+              <li><a href="#"> 金融</a></li>
+            </ul>
+      </div>
+    
+      <div id="shoppingcart2">
+          <div id="product">            
+            <img src="image/product.jpg" width="100" height="110" id="productpic">
+            <form>
+                <li><a class="number" href="#"></a></li>
+                <li><a class="info" href="javascript:void(0)"></a></li>
+                <li><a>√商品已成功加入购物车！</a></li>
+            </form>
+              <div id="checkout">
+                <form>
+                   <p><input type="button" class="btn" value="查看商品详情"></p>
+                   <p><input type="button" class="btn" value="去购物车结算>"></p>
+                </form>
+              </div>
+          </div>
+      </div>
+      
+      <div id="crossline">
+        </div>
+    </div>
+
+  <div id="recommendation">
+    <div id="recommendation1">
+        <div id="tag">
+          <input type="text" calss="tag" value="购买了该商品的用户还购买了">
+        </div>
+        <div id="rec1">
+            <img id="rece1" src="image/rec1.jpg"  width="125" height="125"  />
+            <form>
+                <p><input type="button" class="btn" value="加入购物车">
+                <li><a id="text1" href="#">AMD 锐龙r3 r5 r7 Ryzen 全新盒装CPU处理器 AM4接口 锐龙R5 1600X 6核12线程 3.6GHz￥749.00赠品</a></li>
+            </form>
+        </div> 
+        <div id="rec2">
+          <img id="rece2" src="image\rec2.jpg"alt="product" width="125" height="125" >
+          <form>
+              <p><input type="button" class="btn" value="加入购物车"></p>
+              <li><a id="2"href="#">长城（GreatWall）额定500W HOPE-6000DS 电源 （70cm超长背板走线/三年质保/台系电容/12cm静音风扇/宽幅）</a></li>
+          </form>
+        </div> 
+        <div id="rec3">
+          <img id="rece3" src="image/rec3.jpg"alt="product" width="125" height="125" >
+            <form>
+                <p><input type="button" class="btn" value="加入购物车"></p>
+                <li><a id="3" href="#">长城（GreatWall）额定500W HOPE-6000DS 电源 （70cm超长背板走线/三年质保/台系电容/12cm静音风扇/宽幅）</a></li>
+            </form>
+        </div> 
+        <div id="rec4">
+          <img id="rece4" src="image/rec4.jpg"alt="product" width="125" height="125" >
+          <form>
+              <p><input type="button" class="btn" value="加入购物车"></p>
+              <li><a id="4" href="#">金士顿(Kingston) 240GB SSD固态硬盘 SATA3.0接口 A400系列</a></li>
+          </form>
+        </div> 
+        <div id="rec5">
+          <img id="rece5" src="image/rec5.jpg"alt="product" width="125" height="125" >
+          <form>
+              <p><input type="button" class="btn" value="加入购物车"></p>
+              <li><a id="5" href="#">英特尔（Intel） i5 8500 酷睿八代六核 盒装正品CPU台式机电脑处理器代散热器1151针</a></li>
+          </form>
+        </div> 
+        <div id="rec6">
+          <img id="rece6" src="image/rec6.jpg"alt="product" width="125" height="125" >
+          <form>
+              <p><input type="button" class="btn" value="加入购物车"></p>
+              <li><a id="6" href="#">Tt（Thermaltake）启航者S5 黑色 机箱水冷电脑主机（支持ATX/支持240水冷排/侧透/U3/支持长显卡/游戏机箱）</a></li>
+          </form>
+        </div> 
+        <div id="rec7">
+          <img id="rece7" src="image/rec7.jpg" alt="product" width="125" height="125" >
+          <form>
+              <p><input type="button" class="btn" value="加入购物车"></p>
+              <li><a id="7" href="#">AMD锐龙r53600X/3600 /2600X /2600/2400G处理器AM4接口盒装CPU2600X+B450 AORUS PRO WIFI</a></li>
+          </form>
+        </div>
+        <div id="rec8">
+          <img id="rece8" src="image/rec8.jpg"alt="product" width="125" height="125">
+          <form>
+              <p><input type="button" class="btn" value="加入购物车"></p>
+              <li><a id="8" href="#">三星（SAMSUNG）250GB SSD固态硬盘 M.2接口(NVMe协议) 970 EVO Plus（MZ-V7S250B）</a></li>
+          </form>
+        </div>
+        <div id="chooselist">
+          <div id="listtop1" onmouseover="showotherinfo(1)">
+              <a href="#">1</a>
+          </div>
+          <div id="listtop1" onmouseover="showotherinfo(2)">
+              <a href="#">2</a>
+          </div>
+          <div id="listtop1" onmouseover="showotherinfo(3)">
+              <a href="#">3</a>
+          </div>
+          <div id="listtop1" onmouseover="showotherinfo(4)">
+              <a href="#">4</a>
+          </div>
+        </div>
+    </div>
+    
+
+  <div id="recommendation2">
+        <div id="tag">
+            <input type="text" calss="tag" value="您可能还需要">
+          </div>
+      
+      
+      <div id="recc1">
+        <img id="recee1" src="image/recc1.jpg"alt="productpic" width="125" height="125">
+        <form>
+            <p><input type="button" class="btn" value="加入购物车"></p>
+            <li><a href="#">三星（SAMSUNG）250GB SSD固态硬盘 M.2接口(NVMe协议) 970 EVO Plus（MZ-V7S250B）</a></li>
+        </form>
+        
+      </div>
+      <div id="recc2">
+        <img id="recee2" src="image/recc2.jpg"alt="productpic" width="125" height="125">
+        <form>
+            <p><input type="button" class="btn" value="加入购物车"></p>
+            <li><a href="#">三星（SAMSUNG）250GB SSD固态硬盘 M.2接口(NVMe协议) 970 EVO Plus（MZ-V7S250B）</a></li>
+        </form>
+      </div>
+      <div id="recc3">
+          <img id="recee3" src="image/recc2.jpg"alt="productpic" width="125" height="125">
+          <form>
+              <p><input type="button" class="btn" value="加入购物车"></p>
+              <li><a href="#">三星（SAMSUNG）250GB SSD固态硬盘 M.2接口(NVMe协议) 970 EVO Plus（MZ-V7S250B）</a></li>
+          </form>
+        
+      </div>
+      <div id="recc4">
+          <img id="recee4" src="image/recc2.jpg"alt="productpic" width="125" height="125">
+          <form>
+              <p><input type="button" class="btn" value="加入购物车"></p>
+              <li><a href="#">三星（SAMSUNG）250GB SSD固态硬盘 M.2接口(NVMe协议) 970 EVO Plus（MZ-V7S250B）</a></li>
+          </form>
+      </div>
+      <div id="recc5">
+          <img id="recee5" src="image/recc2.jpg"alt="productpic" width="125" height="125">
+          <form>
+              <p><input type="button" class="btn" value="加入购物车"></p>
+              <li><a href="#">三星（SAMSUNG）250GB SSD固态硬盘 M.2接口(NVMe协议) 970 EVO Plus（MZ-V7S250B）</a></li>
+          </form>
+      </div>
+      <div id="recc6">
+          <img id="recee6" src="image/recc2.jpg"alt="productpic" width="125" height="125">
+          <form>
+              <p><input type="button" class="btn" value="加入购物车"></p>
+              <li><a href="#">三星（SAMSUNG）250GB SSD固态硬盘 M.2接口(NVMe协议) 970 EVO Plus（MZ-V7S250B）</a></li>
+          </form>
+      </div>
+      <div id="recc7">
+          <img id="recee7" src="image/recc2.jpg"alt="productpic" width="125" height="125">
+          <form>
+              <p><input type="button" class="btn" value="加入购物车"></p>
+              <li><a href="#">三星（SAMSUNG）250GB SSD固态硬盘 M.2接口(NVMe协议) 970 EVO Plus（MZ-V7S250B）</a></li>
+          </form>
+      </div>
+      <div id ="recc8">
+          <img id="recee8" src="image/recc2.jpg"alt="productpic" width="125" height="125">
+          <form>
+              <p><input type="button" class="btn" value="加入购物车"></p>
+              <li><a href="#">三星（SAMSUNG）250GB SSD固态硬盘 M.2接口(NVMe协议) 970 EVO Plus（MZ-V7S250B）</a></li>
+          </form>
+      </div>
+      <div id="chooselist2">
+          <div id="listtop2" onmouseover="showotherinfo(5)">
+              <a href="#">1</a>
+          </div>
+          <div id="listtop2" onmouseover="showotherinfo(6)">
+              <a href="#">2</a>
+          </div>
+          <div id="listtop2" onmouseover="showotherinfo7()">
+              <a href="#">3</a>
+          </div>
+          <div id="listtop2" onmouseover="showotherinfo(8)">
+              <a href="#">4</a>
+          </div>
+        </div>
+      </div>
+
+    <div id="recommendation3">
+      <div id="reccc1">
+        <img src="image/reccc1.png"alt="product" width="200" height="200">
+        <ul>
+          <li><a href="#">好用不卡高性价比的手机推荐</a></li>
+          <li><a href="#">五个橙子的故事5</a></li>
+        </ul>
+        <form>
+          <p><input type="button" class="btn" value="❤关注"></p>
+          <p><input type="button" class="btn" value="👍赞"></p>
+        </form>
+
+
+      </div>
+      <div id="reccc2">
+          <img src="image/reccc2.png"alt="product" width="200" height="200">
+          <ul>
+            <li><a href="#">好用不卡高性价比的手机推荐</a></li>
+            <li><a href="#">五个橙子的故事5</a></li>
+          </ul>
+          <form>
+            <p><input type="button" class="btn" value="❤关注"></p>
+            <p><input type="button" class="btn" value="👍赞"></p>
+          </form>
+
+      </div>
+      <div id="reccc3">
+          <img src="image/reccc3.png"alt="product" width="200" height="200">
+          <ul>
+            <li><a href="#">好用不卡高性价比的手机推荐</a></li>
+            <li><a href="#">五个橙子的故事5</a></li>
+          </ul>
+          <form>
+            <p><input type="button" class="btn" value="❤关注"></p>
+            <p><input type="button" class="btn" value="👍赞"></p>
+          </form>
+
+      </div>
+      <div id="reccc4">
+          <img src="image/reccc4.png"alt="product" width="200" height="200">
+          <ul>
+            <li><a href="#">好用不卡高性价比的手机推荐</a></li>
+            <li><a href="#">五个橙子的故事5</a></li>
+          </ul>
+          <form>
+            <p><input type="button" class="btn" value="❤关注"></p>
+            <p><input type="button" class="btn" value="👍赞"></p>
+          </form>
+      </div> 
+
+      <div id="bottominfo">
+        <img src="image/bottominfo.png"alt="bottominfo" width=100% height="670">
+
+      </div>
+    </div>
+  </div>
+
+  </body>
+
+
+  </html>

@@ -91,4 +91,13 @@ public class ProductServiceImpl implements IProductService {
 		return product;
 	}
 
+	@Override
+	public List<Product> selectAllProduct(String categoryName) throws DaoException {
+		List<Product> list=productDao.selectAllProduct(categoryName);
+		return list;
+	}
+	public String selectCategoryID(String categoryName) throws DaoException {
+		String categoryid=productDao.selectCategoryID(categoryName);
+		return categoryid;
+	}
 }
