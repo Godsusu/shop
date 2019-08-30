@@ -5,11 +5,10 @@ import java.sql.SQLException;
 import org.lanqiao.util.Dic;
 
 import cn.edu.guet.exception.DaoException;
+import cn.edu.guet.ioc.BeanFactory;
 
 public class CustomerServiceImpl implements ICustomerService {
-	ICustomerDao customerDao;
-	
-	
+	ICustomerDao customerDao=(ICustomerDao) BeanFactory.getInstance().getBean("customerDao");
 	
 	public void setCustomerDao(ICustomerDao customerDao) {
 		this.customerDao = customerDao;
@@ -31,5 +30,12 @@ public class CustomerServiceImpl implements ICustomerService {
 			e.printStackTrace();
 		}
 		return customer;
+	}
+
+
+	@Override
+	public Customer checkCustomer(String user) throws DaoException {
+		Customer c=customerDao.checkCustomer(user);	
+		return c;
 	}
 }

@@ -5,23 +5,26 @@
     <script type="text/javascript">
     	$(function(){
     		$(".common-submit-btn1").click(function(){
-    			var totalmoney=0
-    			
-    			
-    			
     			$(".jdcheckbox2").each(function(){
+    				var data="";
     				if($(this).prop('checked')){
-    					var productid=$(this).parent().find("input").eq(2).val();
+    					var shoppingcartid=$(this).parent().find("input").eq(2).val();
     					var productNum=$(this).parent().find("input").eq(1).val();
-    					var money=$(this).parent().find("span").eq(1).text();
-    					money=parseFloat(money.split("гд")[1]);
-    					productNum=parseInt(productNum);
-    					alert(productid);
-    					totalmoney+=money*productNum;
+    					alert(shoppingcartid);
+    					alert(productNum);
+    					$.ajax({
+    						url:"../shopping?method=updateShoppingcart",
+    						data:{"shoppingcartid":shoppingcartid,"productNum":productNum},
+    						dataType:"json",
+    						success:function(data){
+    							
+    						}
+    					})
     				}
     			})
-    			setCookie("totalmoney",totalmoney);
-    			window.location.href="../order/settle";
+    			/* setCookie("totalmoney",totalmoney); */
+    			
+    			window.location.href="../order/settle.html";
     			
     			
     			/* $.ajax({
@@ -39,7 +42,6 @@
     			dataType:"JSON",
     			async:false,
     			success:function(data){
-    				console.log(data);
     				var productInfomation="";
     				$.each(data,function(){
     					var product=this.product;
@@ -55,11 +57,11 @@
 	    	              +' <div class="numstyle">'
 	    	              +      '   <a href=javascript:void(0) class="reduce" id="r2">-</a>'
 	    	              +      '   <input type="text" class="numbers" value="'+this.productNum+'" id="n2">'
-	    	              +      '   <input type="hidden" class="productid" value="'+product.productId+'">'
+	    	              +      '   <input type="hidden" class="productid" value="'+this.shoppingcartId+'">'
 	    	              +      '   <a href=javascript:void(0) class="plus" id="p2">+</a>'
 	    	              +' </div> '                      
 	    	              +' </div>'
-	    	        	  +'</div>';
+	    	        	  + '</div>';
     					productInfomation+=productInfo;
     				})
     				$(".shoplist").html(productInfomation);
@@ -74,6 +76,7 @@
 		    var exp = new Date(); 
 		    exp.setTime(exp.getTime() + Days*24*60*60*1000); 
 		    document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString(); 
+		    document.cookie =  + "="+ escape (value) + ";expires=" + exp.toGMTString();
 		} 
     </script>
 </head>

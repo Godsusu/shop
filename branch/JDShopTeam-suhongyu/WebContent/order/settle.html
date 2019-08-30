@@ -1,7 +1,83 @@
 <html>
     <head>
         <meta charset:GBK>
+
+        <script src="../js/jquery-3.3.1.js"></script>
+        <script>
+        	$(function(){
+        		$.ajax({
+        			url:'../shopping?method=getInfo',
+   					success:function(data){
+   						var totalmoney=0;
+   						var productInfomation="";
+   						
+   							var productInfomation="";
+   							
+   		    				$.each(data,function(){
+   		    					
+   		    					var product=this.product;
+   		    					var money=parseFloat(product.price);
+   		    					var num=parseInt(this.productNum);
+   		    					var productInfo='<div class="L1" >'
+   		    					+	'<div style="padding:10px 12px 5px 12px;"> '
+   		                        +	'<font style="font-size: 14px;padding:10px 12px 10px 12px;font-size: 13px;font-weight: bold">商家：京东自营</font>'
+   		                    	+	'</div>'
+   		                    	+	'<div style="padding:5px 24px 5px 24px;">'
+   		                        +	'<font class="font1" style="padding:2px 6px 2px 6px;">换购</font>'
+   		                        +	'<font style="font-size: 14px;padding:10px 12px 10px 12px;font-size: 12px;font-weight: bold">'
+   		                        +  	' 已购满'+this.productNum+'件，您可以返回购物车加价换购商品'
+   		                        +	'</font>'
+   		                    	+	'</div>'
+   		                    	+	'<div style="padding:5px 24px 5px 24px;float: left">'
+   		                        +	'<img src="../upload/'+product.picurl+'" alt="">'
+   		                    	+	'</div>'
+   		                    	+	'<div style="padding:5px 0px 5px 0px;width: 40%;float: left">'
+   			                    +   '<a href="#" style="font-size: 13px;float: left; text-decoration:none;color:#8f8f8f;">'
+   			                    +    product.descInfo
+   			                    +    '</a><br><br><br>'
+   			                    +    '<font style="font-size: 12px;color: blue"> 支持七天无理由退货 </font>'
+   			                    +	'</div>'
+   			                    +	'<div style="padding:5px 0px 5px 10px;width: 30%;float: left">'
+   			                    +    '<font style="font-size: 12px;color: crimson;font-weight: bold;">'+product.price+'元</font>&nbsp;&nbsp;&nbsp;&nbsp;'
+   			                    +    '<font style="font-size: 12px;">X'+this.productNum+'</font>&nbsp;&nbsp;&nbsp;&nbsp;'
+   			                    +    '<font style="font-size: 12px;">有货</font ><br>&nbsp;&nbsp;&nbsp;&nbsp;'
+   			                    +    '<font style="font-size: 12px;">0.200kg</font>'
+   			                    +	'</div>'
+   			    	        	+   '</div>';
+   		    					productInfomation+=productInfo;
+   		    					totalmoney+=num*money;
+	   						})
+	   					$("#right").html(productInfomation);
+	   					$(".totalmoney").text(totalmoney);
+	        		}
+	        	})
+        	})
+            $(function(){
+                $(".addAddr").click(function(){
+                    $(".addAddress").fadeIn(200);
+                    $(".bg").fadeIn(200);
+                })
+                
+                $(".saveAddress").click(function(){
+                	$(".addAddress").find("input").eq(0).val();
+                    $(".addAddress").fadeOut(200);
+                    $(".bg").fadeOut(200);
+                })
+            })
+           
+        </script>
         <style>
+        .payfor{
+        	margin-left:800px;
+        	width:200px;
+        	height:50px;
+        	background:red;
+        	color:white;
+        	font-size:18px;
+        	font-width:500;
+        	border:1px solid red;
+        	
+        }
             #top{
                 width: 100%;height: 30px;
                 background-color: rgb(201, 201, 201);
@@ -123,9 +199,40 @@
                 background-color: #dbfff3;
                 margin-top: 8px
             }
+            .addAddress{
+                display: none;
+                width: 370px;
+                height: 400px;
+                border: 2px solid rgb(218, 0, 0);
+                border-collapse: collapse;
+                position:absolute;
+                margin-top:-1070px;
+                margin-left: 500px;
+                background: #ffffff;
+                padding-left: 110px;
+                z-index: 3;
+            }
+            .saveAddress{
+                border: 2px solid rgb(255, 0, 0);
+                margin-top: -30px;
+                margin-left:20px;
+                width:200px;
+                height:50px;
+                color: rgb(231, 231, 231);
+                font-size:18px;
+            }
+            .bg{
+                width: 100%;
+                height: 100%;
+                background:rgba(97, 97, 97, 0.6);
+                position: fixed;
+                z-index: 2;
+                display: none;
+            }
         </style>
     </head>
     <body>
+        <div class="bg"></div>
         <div id="top">
             <div id="link">
                 <ul id="topul1">
@@ -161,7 +268,7 @@
                 <div class="message1" >
                     <font style="float: left;">收货人信息</font>
                     <li style="list-style:none;">
-                        <a href="#" style="float: right;text-decoration:none;color:rgb(34, 85, 255);">
+                        <a class="addAddr" href="javascript:void(0)" style="float: right;text-decoration:none;color:rgb(34, 85, 255);">
                         新增收货地址</a>
                     </li>
                     <div style="clear: both"></div><br>
@@ -281,45 +388,7 @@
                     </div>
                         
                     <div id="right">
-                        <div style="padding:10px 12px 5px 12px;"> 
-                            <font style="font-size: 14px;padding:10px 12px 10px 12px;font-size: 13px;font-weight: bold">商家：京东自营</font>
-                        </div>
-                        <div style="padding:5px 24px 5px 24px;">
-                            <font class="font1" style="padding:2px 6px 2px 6px;">
-                                换购
-                            </font>
-                            <font style="font-size: 14px;padding:10px 12px 10px 12px;font-size: 12px;font-weight: bold">
-                                已购满1件，您可以返回购物车加价换购商品
-                            </font>
-                        </div>
-                        <div style="padding:5px 24px 5px 24px;float: left">
-                            <img src="imag1.jpg" alt="">
-                        </div>
-                        <div style="padding:5px 0px 5px 0px;width: 40%;float: left">
-                            <a href="#" style="font-size: 13px;float: left; text-decoration:none;color:#8f8f8f;">
-                                三星(SAMSUNG) 2TB Type-c USB3.1 移动硬盘 固态(PSSD)T5 玄英黑 最大传输速度...
-                            </a><br><br><br>
-                            <font style="font-size: 12px;">
-                                颜色：T5玄英黑    尺码：2T
-                            </font><br>
-                            <font style="font-size: 12px;color: blue">
-                                支持七天无理由退货
-                            </font>
-                        </div>
-                        <div style="padding:5px 0px 5px 10px;width: 30%;float: left">
-                            <font style="font-size: 12px;color: crimson;font-weight: bold;">
-                                2799.00元
-                            </font>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <font style="font-size: 12px;">
-                                X1
-                            </font>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <font style="font-size: 12px;">
-                                有货
-                            </font ><br>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <font style="font-size: 12px;">
-                                    0.200kg
-                            </font>
-                        </div>
+                        
                     </div>
                 </div>
                 <div class="message1" style="height: 6%">
@@ -340,9 +409,9 @@
                 <div class="message1" style="height: 10%">
                     <div style="float: right;padding:20px 0px 5px 10px;">
                         <font style="font-size: 12px;">
-                            1 件商品，总商品金额：
+                           总商品金额：
                         </font>&nbsp;&nbsp;&nbsp;&nbsp; 
-                        <font style="font-size: 12px;">
+                        <font class='totalmoney' style="font-size: 12px;">
                             ￥2999.00
                         </font><br> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <font style="font-size: 12px;">
@@ -362,7 +431,7 @@
                             <font style="font-size: 12px;">
                                 应付总金额：
                             </font>&nbsp;&nbsp;&nbsp;&nbsp; 
-                            <font style="font-size: 12px;color: crimson;font-weight: bold;">
+                            <font class='totalmoney' style="font-size: 12px;color: crimson;font-weight: bold;">
                                 ￥2999.00
                             </font><br> 
                             <font style="font-size: 12px;">
@@ -374,6 +443,20 @@
                         </div>
                     </div>
             </div>
+            <input class="payfor" type="button" value="确认支付"/>
         </div>
+
+        <div class="addAddress">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;新增收货地址</br><br><br>
+                所在地区&nbsp;&nbsp;&nbsp;<input type="text"></br></br>
+                收 货 人&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"></br></br>
+                详细地址&nbsp;&nbsp;&nbsp;<input type="text"></br></br>
+                手机号码&nbsp;&nbsp;&nbsp;<input type="text"></br></br>
+                邮政编码&nbsp;&nbsp;&nbsp;<input type="text"></br></br>
+            </br>
+            </br>
+            </br>
+                <input type="button" class="saveAddress" value="保存收货人信息" style="background-color: red"/>
+            </div>
     </body>
 </html>

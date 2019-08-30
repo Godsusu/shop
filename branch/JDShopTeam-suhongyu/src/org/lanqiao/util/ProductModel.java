@@ -5,6 +5,9 @@ import cn.edu.guet.product.Product;
 public class ProductModel {
 	private Product product;
 	private String productNum;
+	private String shoppingcartId;
+	
+	
 	public Product getProduct() {
 		return product;
 	}
@@ -17,6 +20,15 @@ public class ProductModel {
 	public void setProductNum(String productNum) {
 		this.productNum = productNum;
 	}
+	public String getShoppingcartId() {
+		return shoppingcartId;
+	}
+	public void setShoppingcartId(String shoppingcartId) {
+		this.shoppingcartId = shoppingcartId;
+	}
+	
+	
+	
 	
 	
 }

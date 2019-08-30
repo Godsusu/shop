@@ -5,11 +5,15 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.util.UUID;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.lanqiao.util.SendEmail;
 import org.lanqiao.util.TransactionHandle;
+
+import com.alibaba.fastjson.JSON;
 
 import cn.edu.guet.exception.DaoException;
 import cn.edu.guet.ioc.BeanFactory;
@@ -112,6 +116,53 @@ public class CustomerController extends BaseServlet {
 			e.printStackTrace();
 		}
 	}
+	public void checkCustomer(HttpServletRequest request, HttpServletResponse response){
+		String user=request.getParameter("user");	
+		String password=request.getParameter("password");
+		response.setContentType("text/plain;charset=gbk");
+		PrintWriter out=null;
+		ICustomerService customerService=(ICustomerService) BeanFactory.getInstance().getBean("customerService");
+		try {
+			
+			Customer customer=customerService.checkCustomer(user);
+			if(customer!=null){
+				if(password.equals(customer.getPassword())){
+					HttpSession session=request.getSession();
+					session.setAttribute("customerName", customer.getUsername());
+					session.setAttribute("customerid", customer.getCustomerId());
+					out=response.getWriter();
+					out.write("true");
+				}else{
+					out=response.getWriter();
+					out.write("√‹¬Î¥ÌŒÛ");
+				}
+				
+			}else{
+				out=response.getWriter();
+				out.write("’À∫≈≤ª¥Ê‘⁄");
+			}
+			out.flush();
+			out.close();
+		} catch (DaoException | IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void getUserName(HttpServletRequest request, HttpServletResponse response){
+		try {
+			PrintWriter out=null;
+			response.setContentType("application/json;charset=gbk");
+			out=response.getWriter();
+			HttpSession session=request.getSession();
+			out.write(JSON.toJSONString(session.getAttribute("customerName")));
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	
 	
 }

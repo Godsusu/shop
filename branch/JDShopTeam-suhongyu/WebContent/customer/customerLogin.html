@@ -52,9 +52,12 @@
                       </div>
                       <div id="show1">
                            <div id="s">
+                           
+                           <!-- --------------------------------------------------------------------------------------------------------->
+                           
                            <form>
-                               <img src="./imges/user.png"><input type="text" name="user" placeholder="邮箱/用户名/已验证手机" width="280" height="50"><br><br><br><br>
-                                <img src="./imges/password.png"><input type="password" name="password" placeholder="密码"><br><br>
+                               <img src="./imges/user.png"><input type="text" class="user" name="user" placeholder="邮箱/用户名/已验证手机" width="280" height="50"><br><br><br><br>
+                                <img src="./imges/password.png"><input type="password" class="password" name="password" placeholder="密码"><br><br>
                                  <a href="">忘记密码</a><br><br><br><br>
                                 <input type="button" class="customer-login" name="denglu" style="background-color: rgb(228,57,60);" value="登录">
                            </form>
@@ -124,6 +127,26 @@ $("#text").
 		if (e.keyCode == 13) {
 			makeCode();
 		}
-	});   
+	}); 
+
+$(function(){
+	$(".customer-login").click(function(){
+		var user=$(".user").val();
+		var password=$(".password").val();
+		$.ajax({
+			url:"customer?method=checkCustomer",
+			data:{"user":user,"password":password},
+			dataType:'text',
+			success:function(data){
+				if(data=="true"){
+					window.location.href="index.html";
+				}else{
+					alert(data);
+				}
+			}
+					
+		})
+	});
+})
 </script>
 </html>

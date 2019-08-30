@@ -9,6 +9,8 @@ import cn.edu.guet.product.Product;
 public class ShoppingCartServiceImpl implements IShoppingCartService {
 
 	IShoppingCartDao iscd=new ShoppingCartDaoImpl();
+	
+	
 	@Override
 	public void addProductToCart(ShoppingCart s) throws DaoException {
 		try {
@@ -19,8 +21,23 @@ public class ShoppingCartServiceImpl implements IShoppingCartService {
 	}
 	@Override
 	public List<ShoppingCart> selectShoppingCart(String customerId) {
+		System.out.println(iscd);
 		List<ShoppingCart> list=iscd.selectAllProduct(customerId);
 		return list;
+	}
+	@Override
+	public void updataShoppingCart(ShoppingCart shoppingCart) {
+		try {
+			iscd.update(shoppingCart);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	@Override
+	public List<ShoppingCart> getAllOrder() {
+		
+		return iscd.getAllOrder();
 	}
 
 }

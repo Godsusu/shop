@@ -20,11 +20,29 @@
 
     <link href="./css/style3.css" rel="stylesheet">
     
-    
+     <script src="js/jquery-3.3.1.js"></script>
     <script type="text/javascript">
     	function regist(){
     		window.location.href="customer?method=regist";
     	}
+    	
+    	function login(){
+    		window.location.href="customer?method=customerLogin";
+    	}
+    	
+    	$(function(){
+    		$.ajax({
+    			url:"customer?method=getUserName",
+    			dataType:"json",
+    			success:function(data){
+    				if(data==null){
+    					
+    				}else
+    					$(".link-login").text(data);
+    			}
+    		})
+    	})
+    	
     </script>
     <script src="js/jquery-3.3.1.js"></script>
     <script src="js/indexClick.js"></script>
@@ -211,7 +229,7 @@
             <!--menu start-->
             <ul class="fr">
                 <li id="login" class="shortcut_btn fore1">
-                    <a href="" class="link-login">你好，请登录</a>&nbsp;&nbsp;
+                    <a href="javascript:login()" class="link-login">你好，请登录</a>&nbsp;&nbsp;
                     <a href="javascript:regist()" class="link-regist style-red">免费注册</a>
                 </li>
                 <li class="spacer"></li>

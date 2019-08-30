@@ -10,4 +10,6 @@ public interface IShoppingCartService {
 	void addProductToCart(ShoppingCart s) throws DaoException;
 	
 	List<ShoppingCart> selectShoppingCart(String customerId);
+	void updataShoppingCart(ShoppingCart shoppingCart);
+	List<ShoppingCart> getAllOrder();
 }

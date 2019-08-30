@@ -7,6 +7,18 @@
 	<script src="../js/jquery-3.3.1.js"></script>
 	<script>
 		$(function(){
+			$.ajax({
+				url:"../customer?method=getUserName",
+				dataType:"json",
+				success:function(data){
+					if(data==null){
+						
+					}else
+						$(".link-login").text(data);
+				}
+			})
+		})
+		$(function(){
     		var url=window.location.href;
         	var productid=url.split("?")[1].split("=")[1];
         	$.ajax({
@@ -91,7 +103,7 @@
 			<a href="#">京东首页</a>&nbsp;&nbsp;<a href="#">广西</a>
 		</div>
 		<div class="head-r">
-			<a href="#">你好，请登录</a>&nbsp;<a href="javascript:regist();" style="color: red">免费注册</a>&nbsp;&nbsp;
+			<a href="#" class="link-login">你好，请登录</a>&nbsp;<a href="javascript:regist();" style="color: red">免费注册</a>&nbsp;&nbsp;
 			<a href="#">我的订单</a>&nbsp;|&nbsp;
 			<a href="#">我的京东</a>&nbsp;|&nbsp;
 			<a href="#">京东会员</a>&nbsp;|&nbsp;
