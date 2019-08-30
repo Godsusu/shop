@@ -1,0 +1,379 @@
+<html>
+    <head>
+        <meta charset:GBK>
+        <style>
+            #top{
+                width: 100%;height: 30px;
+                background-color: rgb(201, 201, 201);
+            }
+ /* ---------------------------------------------------------------  */
+            #link {
+                width: 1000px;
+                height: 30px;
+                margin:auto;
+            }
+            #link #topul1{
+            list-style:none;
+            font-size:12px;
+            margin:0px;
+            padding:0px;
+            margin-left: 0%;
+            }
+            #link #topul1 li{
+            float:left;
+            text-align:center;
+            }
+            #link #topul1 li a{
+            display: block;
+            padding:7px 6px 7px 6px;
+            }
+            #link #topul1 li a:link,#link ul li a:visited{
+            text-decoration:none;
+            color:#8f8f8f;
+            }
+            #link #topul1 li a:hover{
+            color: #C00;
+            } 
+            #link #topul2{
+            list-style:none;
+            font-size:12px;
+            margin:0px;
+            padding:0px;
+            margin-right: 0%;
+            }
+            #link #topul2 li{
+            float: right;
+            text-align:center;
+            }
+            #link #topul2 li a{
+            display: block;
+            padding:7px 6px 7px 6px;
+            }
+            #link #topul2 li a:link,#link ul li a:visited{
+            text-decoration:none;
+            color:#8f8f8f;
+            }
+            #link #topul2 li a:hover{
+            color: #C00;
+            } 
+/* ---------------------------------------------------------------  */
+            #main{  
+                width: 1000px;height: 1200px;
+                margin:auto;
+            }
+            #message{
+                width: 100%;height: 80%;
+                border: 1px solid rgb(167, 166, 166)
+            }
+            .message1{
+                width: 96%;height: 24%;
+                margin-top: 10px;margin-left: 2%;
+                border: 1px solid #8f8f8f;
+                border-top-color:rgba(0, 0, 0, 0);
+                border-left-color:rgba(0, 0, 0, 0);
+                border-right-color:rgba(0, 0, 0, 0);
+            }
+            .receiver{
+                width: 96%;
+                height: 80px;
+                margin-left: 2%;
+                border: 1px solid #8f8f8f;
+                border-top-color:rgba(0, 0, 0, 0);
+                border-left-color:rgba(0, 0, 0, 0);
+                border-right-color:rgba(0, 0, 0, 0);
+            }
+            .font1{
+                color: aliceblue;
+                background-color: #C00;
+                padding:3px 6px 3px 6px;
+                font-size: 12px;
+                float: left;
+                
+            }.font2{
+                color: #C00;
+                border: 1px solid #C00;
+                padding:3px 6px 3px 6px;
+                font-size: 12px;
+                border: 1px solid #8f8f8f;
+            }
+            .zf{
+                padding:3px 30px 3px 30px;
+                list-style:none;
+            }
+            #left{
+                width: 35%;
+                height: 85%;
+                float: left;
+                background-color: #ececec;
+                margin-top: 8px
+            }
+            .left1{
+                width: 90%;
+                height: 20%;
+                margin-left: 24px;
+                border: 1px solid #8f8f8f;
+                border-top-color:rgba(0, 0, 0, 0);
+                border-left-color:rgba(0, 0, 0, 0);
+                border-right-color:rgba(0, 0, 0, 0);
+            }
+            #right{
+                width: 65%;
+                height: 85%;
+                float:right;
+                background-color: #dbfff3;
+                margin-top: 8px
+            }
+        </style>
+    </head>
+    <body>
+        <div id="top">
+            <div id="link">
+                <ul id="topul1">
+                    <li><a href="#">京东首页</a></li>
+                </ul>
+                <ul id="topul2">
+                    <li><a href="#">手机京东</a></li>
+                    <li><a href="#">网站导航</a></li>
+                    <li><a href="#">客户服务</a></li>
+                    <li><a href="#">企业采购</a></li>
+                    <li><a href="#">京东会员</a></li>
+                    <li><a href="#">我的京东</a></li>
+                    <li><a href="#">我的订单</a></li>
+                    <li><a href="#">你好，请登录</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="main">
+            <ul id="topul1" style="margin:0px;padding:10px;list-style:none;">
+                <li style="float: left;font: 2em sans-serif;">
+                    <a href="#" style="color:red;text-decoration:none;">京东</a>
+                </li>
+                <font style="float: right;font: 0.1em sans-serif;padding:20px 6px 7px 6px;">
+                    <font style="color: rgb(141, 230, 145);padding:10px 12px 7px 12px;">我的购物车</font>
+                    <font style="color: rgb(3, 197, 3);padding:10px 12px 7px 12px;">填写核对订单信息</font> 
+                    <font style="color: rgb(117, 117, 117);padding:10px 12px 7px 12px;">成功提交订单</font>  
+                </font>
+                <font style="clear: both;">
+                </font><br><br>
+            </ul>
+            填写并核对订单信息
+            <div id="message">
+                <div class="message1" >
+                    <font style="float: left;">收货人信息</font>
+                    <li style="list-style:none;">
+                        <a href="#" style="float: right;text-decoration:none;color:rgb(34, 85, 255);">
+                        新增收货地址</a>
+                    </li>
+                    <div style="clear: both"></div><br>
+                    <div class="receiver">
+                        <div style="float: left">
+                            <font style="padding:3px 30px 3px 30px;font-size: 12px;border: 2px solid red">
+                                张三
+                            </font>&nbsp;
+                            <font style="font-size: 12px;">张三</font>&nbsp;&nbsp;
+                            <font style="font-size: 12px;">广西 桂林市 灵川县 灵川镇 灵田乡东田村桂林电子科技大学(花江校区）</font> &nbsp;&nbsp;
+                            <font style="font-size: 12px;">123456</font>&nbsp;&nbsp;
+                            <font style="font-size: 12px;">默认地址</font>
+                        </div>
+                        <li style="padding:3px 30px 3px 30px;list-style:none;">
+                            <a href="#" style="font-size: 12px;float: right;text-decoration:none;color:rgb(34, 85, 255);">
+                            编辑</a>
+                        </li>
+                        <div style="clear: both"></div><br>
+                        <div>
+                            <li style="font-size: 12px;list-style:none;">
+                                <a href="#" style="font-size: 12px;text-decoration:none;">
+                                其他地址</a>
+                            </li>
+                        </div>
+                    </div>
+                    <div class="receiver" style="border-bottom-color: rgba(0, 0, 0, 0);">
+                        <div style=" margin-top: 8px">
+                            <font class="font1">
+                                京东自提
+                            </font>
+                            <font style="color: #8f8f8f;font-size: 12px;padding:3px 6px 3px 6px;float: left;">
+                                随时取
+                            </font> 
+                            <li style="padding:3px 30px 3px 30px;list-style:none;">
+                                <a href="#" style="font-size: 12px;float: left;text-decoration:none;color:rgb(34, 85, 255);">
+                                详情</a>
+                            </li>
+                            <div style="clear: both"></div><br>
+                        </div>
+                        <div>
+                            <div style="float: left">
+                                <font style="padding:3px 30px 3px 30px;font-size: 12px;border: 2px solid red">
+                                        桂林电子科大花江
+                                </font>&nbsp;
+                                <font style="font-size: 12px;">桂林电子科大花江</font>&nbsp;&nbsp;
+                                <font style="font-size: 12px;">桂林市灵川县灵川镇桂林电子...</font> &nbsp;&nbsp;
+                                <font style="font-size: 12px;">张三</font>&nbsp;&nbsp;
+                                <font style="font-size: 12px;">123456</font>&nbsp;&nbsp;&nbsp;
+                                <font style="font-size: 12px;">距收货人 1.9千米</font>&nbsp;&nbsp;
+                                <font class="font2">
+                                    距离最近
+                                </font>&nbsp;&nbsp;&nbsp;&nbsp;
+                            </div>
+                            <li style="padding:3px 30px 3px 30px;list-style:none;float: right;">
+                                <a href="#" style="font-size: 12px;float: right;text-decoration:none;color:rgb(34, 85, 255);">
+                                修改自提点</a>
+                            </li>
+                        </div>  
+                    </div>
+                </div >
+                <div class="message1" style="height: 9%">
+                    <font class="zt">支付方式</font>
+                    <div style=" margin-top: 8px">
+                        <input type="button" value="货到付款" style="font-size: 12px;">&nbsp;
+                        <input type="button" value="在线支付" style="font-size: 12px;">&nbsp;&nbsp;&nbsp;
+                        <a href="#" style="font-size: 12px;text-decoration:none;color:#8f8f8f;">更多</a>
+                    </div>
+                </div>
+                <div class="message1" style="height: 33%">
+                    <font >送货清单</font><br>
+                    <div id="left">
+                        <div style="padding:10px 12px 10px 12px;"> 
+                            <font style="font-size: 14px;padding:10px 12px 10px 12px;font-size: 13px;font-weight: bold">配送方式</font>
+                            <a href="#" style="font-size: 12px;text-decoration:none;color:blue;">更多</a><br>
+                        </div>
+                        <div style="padding:10px 24px 10px 24px;">
+                            <font style="padding:3px 30px 3px 30px;font-size: 12px;border: 2px solid red">
+                                京东快递
+                            </font>
+                        </div>
+                        <div class="left1">
+                            <br>
+                            <font style="font-size: 11px;padding:0px 0px 3px 0px;">
+                                标 准 达：
+                            </font>
+                            <font style="font-size: 12px;">
+                                预计7月31号周三9：00-21：00送达
+                            </font>
+                            <a href="#" style="font-size: 12px;float: right; text-decoration:none;color:blue;">修改</a><br>
+                        </div>
+                        <div class="left1" style="height: 26%">
+                            <div style="padding:0px 0px 6px 0px;">
+                                <input type="checkbox" name="box1" value="退换无忧">
+                                <font style="font-size: 12px;">
+                                    退换无忧
+                                </font>
+                                <font style="font-size: 12px;color: #C00;">
+                                    0.5元
+                                </font>
+                            </div>
+                            <div>
+                                <font style="font-size: 12px;">
+                                    自签收后7天内退货，15天内换货，可享一次上门取件服务
+                                </font>&nbsp;
+                                <a href="#" style="font-size: 12px;text-decoration:none;color:blue;">查看详情</a>
+                            </div>
+                            <div style="padding:30px 0px 12px 0px;">
+                                <font style="font-size: 12px;font-weight: bold">
+                                    总重量：
+                                </font>
+                                <font style="font-size: 12px;">
+                                    0.200kg
+                                </font>
+                            </div>
+                            
+                        </div>
+                    </div>
+                        
+                    <div id="right">
+                        <div style="padding:10px 12px 5px 12px;"> 
+                            <font style="font-size: 14px;padding:10px 12px 10px 12px;font-size: 13px;font-weight: bold">商家：京东自营</font>
+                        </div>
+                        <div style="padding:5px 24px 5px 24px;">
+                            <font class="font1" style="padding:2px 6px 2px 6px;">
+                                换购
+                            </font>
+                            <font style="font-size: 14px;padding:10px 12px 10px 12px;font-size: 12px;font-weight: bold">
+                                已购满1件，您可以返回购物车加价换购商品
+                            </font>
+                        </div>
+                        <div style="padding:5px 24px 5px 24px;float: left">
+                            <img src="imag1.jpg" alt="">
+                        </div>
+                        <div style="padding:5px 0px 5px 0px;width: 40%;float: left">
+                            <a href="#" style="font-size: 13px;float: left; text-decoration:none;color:#8f8f8f;">
+                                三星(SAMSUNG) 2TB Type-c USB3.1 移动硬盘 固态(PSSD)T5 玄英黑 最大传输速度...
+                            </a><br><br><br>
+                            <font style="font-size: 12px;">
+                                颜色：T5玄英黑    尺码：2T
+                            </font><br>
+                            <font style="font-size: 12px;color: blue">
+                                支持七天无理由退货
+                            </font>
+                        </div>
+                        <div style="padding:5px 0px 5px 10px;width: 30%;float: left">
+                            <font style="font-size: 12px;color: crimson;font-weight: bold;">
+                                2799.00元
+                            </font>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <font style="font-size: 12px;">
+                                X1
+                            </font>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <font style="font-size: 12px;">
+                                有货
+                            </font ><br>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <font style="font-size: 12px;">
+                                    0.200kg
+                            </font>
+                        </div>
+                    </div>
+                </div>
+                <div class="message1" style="height: 6%">
+                    <font class="zt">发票信息</font>
+                    <div class="receiver" style="border-bottom-color: rgba(0, 0, 0, 0);">
+                        <font style="font-size: 12px;">
+                            电子普通发票
+                        </font>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <font style="font-size: 12px;">
+                            个人
+                        </font>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <font style="font-size: 12px;">
+                            商品明细
+                        </font>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="#" style="font-size: 12px;text-decoration:none;color:blue;">修改</a>
+                    </div>
+                </div>
+                <div class="message1" style="height: 10%">
+                    <div style="float: right;padding:20px 0px 5px 10px;">
+                        <font style="font-size: 12px;">
+                            1 件商品，总商品金额：
+                        </font>&nbsp;&nbsp;&nbsp;&nbsp; 
+                        <font style="font-size: 12px;">
+                            ￥2999.00
+                        </font><br> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <font style="font-size: 12px;">
+                            运费:
+                        </font>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+                        <font style="font-size: 12px;">
+                            ￥0.00
+                        </font><br>  
+                    </div>
+                </div>
+                <div class="message1" style="border-bottom-color: rgba(0, 0, 0, 0);height: 10%">
+                        <div style="float: right;padding:20px 0px 5px 10px;">
+                                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
+                                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
+                                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
+                                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
+                            <font style="font-size: 12px;">
+                                应付总金额：
+                            </font>&nbsp;&nbsp;&nbsp;&nbsp; 
+                            <font style="font-size: 12px;color: crimson;font-weight: bold;">
+                                ￥2999.00
+                            </font><br> 
+                            <font style="font-size: 12px;">
+                                    寄送至： 广西 桂林市 灵川县 灵川镇 灵田乡东田村桂林电子科技大学(花江校区)
+                            </font>&nbsp;&nbsp;&nbsp;&nbsp; 
+                            <font style="font-size: 12px;">
+                                    收货人：张三 123456789
+                            </font><br>  
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </body>
+</html>

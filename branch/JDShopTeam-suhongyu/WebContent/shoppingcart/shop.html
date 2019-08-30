@@ -6,6 +6,9 @@
     	$(function(){
     		$(".common-submit-btn1").click(function(){
     			var totalmoney=0
+    			
+    			
+    			
     			$(".jdcheckbox2").each(function(){
     				if($(this).prop('checked')){
     					var productid=$(this).parent().find("input").eq(2).val();
@@ -17,12 +20,13 @@
     					totalmoney+=money*productNum;
     				}
     			})
-    			alert(totalmoney);
+    			setCookie("totalmoney",totalmoney);
+    			window.location.href="../order/settle";
     			
     			/* $.ajax({
         			url:"shopping?method=payProduct",
         			success:function(){
-        				window.location.href="";
+        				
         			}
         		}) */
     		})
@@ -61,6 +65,15 @@
     			}
     		})
     	})
+    	
+    	
+    	function setCookie(name,value) 
+		{ 
+		    var Days = 30; 
+		    var exp = new Date(); 
+		    exp.setTime(exp.getTime() + Days*24*60*60*1000); 
+		    document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString(); 
+		} 
     </script>
 </head>
 <body>
