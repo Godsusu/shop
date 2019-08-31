@@ -15,6 +15,7 @@ public class Product {
 	private String isJingXuan;
 	private String isReMai;
 	private String isXiaJia;
+	
 	public String getProductId() {
 		return productId;
 	}

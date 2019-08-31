@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
-  <display-name>JdShop</display-name>
+  <display-name>JDShopTeam</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
@@ -70,4 +70,25 @@
   <listener>
     <listener-class>cn.edu.guet.listener.BeanInjectListener</listener-class>
   </listener>
+  <servlet>
+    <description></description>
+    <display-name>ShoppingCartController</display-name>
+    <servlet-name>ShoppingCartController</servlet-name>
+    <servlet-class>cn.edu.guet.shoppingcart.ShoppingCartController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShoppingCartController</servlet-name>
+    <url-pattern>/shopping</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>OrderController</display-name>
+    <servlet-name>OrderController</servlet-name>
+    <servlet-class>cn.edu.guet.order.OrderController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrderController</servlet-name>
+    <url-pattern>/order</url-pattern>
+  </servlet-mapping>
 </web-app>

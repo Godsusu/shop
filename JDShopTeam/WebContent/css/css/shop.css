@@ -1,0 +1,314 @@
+body{
+    overflow-x: hidden;
+}
+.navigation{
+    position: relative;
+    background-color: #E3E4E5;
+    top: -8px;
+    width: 100%;
+    height: 35px;
+}
+.t1{
+    top: -13px;
+    position: absolute;
+    left: 10%;
+}
+.t2{
+    position: absolute;
+    left: 28%;
+    top: -13px;
+}
+
+.fl li{
+   list-style: none;
+   margin-left: 15px;
+   float: left;
+   color: #8E8B8B;
+}
+
+.fr li{
+    float: left;
+    margin-left: 15px;
+    padding-left: 12px;
+    list-style: none;
+    border-left: 1px solid #8E8B8B;
+    color: #8E8B8B;
+}
+.fr li:first-child{
+    border-left: none;
+}
+.jd1{
+    position: relative;
+    left: 13%;
+    top: 16px;
+}
+.t3{
+    background-color: #C91623;
+    position: absolute;
+    left: 58%;
+    top: 85px;
+    border: 2px solid #C91623;
+}
+.itxt{
+    position: relative;
+    padding: 0px;
+    width: 300px;
+    height: 28px;
+}
+.button{
+    width: 60px;
+    background-color: #C91623;
+    border: 0;
+    color: white;
+}
+.cart-filter-bar{
+    position: relative;
+    left: 11%;
+    top: 30px;
+}
+.switch-cart li{
+    list-style: none;
+}
+.a1{
+    font-style:normal ;
+    font-family: "ËÎÌו";
+    font-size: 21px;
+    font-weight:bold;
+	color: #DC0000;
+}
+a
+{ 
+    text-decoration:none
+} 
+.number{
+    font-size: 15px;
+    color: #DC0000;
+}
+.cart-store{
+    position: relative;
+    left: 65%;
+    top: -11px;
+}
+.jarea{
+    width: 207px;
+}
+.cart-thead{
+    background-color: #E3E4E5;
+    height: 40px;
+    width: 71%;
+    margin:0 auto;
+}
+.jdcheckbox{
+    position: relative;
+    margin-top: 14px;
+}
+.select-all{
+    position: relative;
+    font-size: 13px;
+    color: #666666;
+}
+.commodity{
+    position: relative;
+    left: 80px;
+    font-size: 13px;
+    color: #666666;
+}
+.price{
+    position: relative;
+    left: 400px;
+    font-size: 13px;
+    color: #666666;
+}
+.num{
+    position: relative;
+    left: 500px;
+    font-size: 13px;
+    color: #666666;
+}
+.subtotal{
+    position: relative;
+    left: 600px;
+    font-size: 13px;
+    color: #666666;
+}
+.operation{
+    position: relative;
+    left: 690px;
+    font-size: 13px;
+    color: #666666;
+}
+.shoplist{
+    position: relative;
+    border: 1px solid #FFFFFF;
+    width: 71%;
+    height: 200px;
+    margin: 0 auto;
+    top: 16px;
+}
+.shopname{
+    font-size: 13px;
+    color: #666666;
+}
+.showgood{
+	height:100px;
+	width:900px;
+    position: relative;
+    border-width: 1px;
+    border-top: 2px solid #AAAAAA;
+    top: 5px;
+}
+.jdcheckbox2{
+    position: absolute;
+    top:30px;
+    margin-left:0px;
+}
+.goodimg{
+	margin-left: 50px;
+	position: absolute;
+    border: 1px solid #EEEEEE;
+    padding: 1px;
+}
+.q1{
+    top: 17px;
+    position: relative;
+    margin-left: 175px;
+    width: 195px;
+    float: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    font-size: 13px;
+    color: #333333;
+}
+.goodinfo{
+    position: relative;
+    margin-left: 20px;
+    width: 92px;
+    float: left;
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    top: 20px;
+    color: #666666;
+}
+.money{
+    position: absolute;
+    font-size: 15px;
+    top:15px;
+    left: 495px;
+}
+.numstyle{
+	position: absolute;
+    width:87px;
+    height: 25px;
+    left: 790px;
+    top:25px;
+}
+.reduce{
+    float: left;
+    position: relative;
+    border: 1px solid #CACBCB;
+    text-align: center;
+    width: 18px;
+    height: 25px;
+}
+.numbers{
+    float: left;
+    position: relative;
+    width: 45px;
+    height: 27px;
+    text-align: center;
+    border: 1px solid #CACBCB;
+}
+.plus{
+    float: left;
+    position: relative;
+    width: 18px;
+    text-align: center;
+    height: 25px;
+    border: 1px solid #CACBCB;
+}
+.sub{
+    position: relative;
+    font-size: 15px;
+    left: 645px;
+    top: -91px;
+}
+.M1{
+    position: relative;
+    left: 410px;
+    top: -63px;
+}
+.m1{
+    list-style: none;
+    font-size: 13px;
+    color: #AAAAAA;
+    line-height: 22px;
+}
+.L1{
+    margin-top: 20px;
+    float:left;
+}
+.jdcheckbox3{
+    position: relative;
+    margin-top:15px ;
+    left: -2px;
+}
+.select-text{
+    font-size: 13px;
+    color: #666666;
+}
+.options-box{
+	position:relative;
+	width:1900px;
+	float:left;
+    height: 40px;
+}
+.operationl{
+    position: absolute;
+    margin-top:20px;
+}
+a{
+    color: #666666;
+    font-size: 13px;
+}
+.amount-sum{
+    position: relative;
+    left: 550px;
+    top: -36px;
+    font-size: 13px;
+}
+.amount-sum-num{
+    color: #E2231A;
+}
+.price-sum-text{
+    font-size: 12px;
+    color: #666666;
+}
+.price-sum{
+    position: relative;
+    left: 720px;
+    top: -63px;
+}
+.price-sum-price{
+    font-size: 17px;
+    color: #E2231A;
+}
+.price-sum-extra{
+    font-size: 12px;
+    color: #666666;
+}
+.common-submit-btn{
+    position: relative;
+    left: 1000px;
+    margin-top:30px;
+}
+.common-submit-btn1{
+    font-size: 25px;
+    color: #FFFFFF;
+    background-color: #E64347;
+    border: 0;
+    width: 95px;
+    height: 40px;
+}

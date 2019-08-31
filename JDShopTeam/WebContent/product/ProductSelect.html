@@ -1,0 +1,380 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../css/product.css">
+        <title>ProductSelect</title>
+        <script src="../js/jquery-3.3.1.js"></script>
+        <script>
+        $(function(){
+    		$.ajax({
+    			url:"../customer?method=getUserName",
+    			dataType:"json",
+    			success:function(data){
+    				if(data==null){
+    					
+    				}else
+    					$(".link-login").text(data);
+    			}
+    		})
+    	})
+        	$(function(){
+        		var url=window.location.href;
+            	var categoryid=url.split("?")[1].split("=")[1];
+            	$.ajax({
+            		url:"../product?method=viewAllProduct&categoryid="+categoryid,
+            		type:"post",
+            		async:false,
+            		dataType:"JSON",
+            		success:function(data){
+            			var productInfomation="";
+            			$.each(data,function(index,value){
+            				var productInfo='<div class="kuang11">'
+		                    +'<div class="spright">'
+		                    +    '<img src="../upload/'+value.picurl+'" width="220" height="220" id="spright11"/>'
+		                    +'</div>'
+		                    +'<div class="num11">'
+		                    +    '<a href="#">'+value.price+'</a> '
+		                    +'</div>'
+		                    +'<div class="word11">'
+		                    +    '<a href="#">'+value.name+'</a>'
+		                    +'</div>'
+		                    +'<div class="evaluate11">'
+		                    +    '<a href="#">已有55万+人评价</a>'
+		                    +'</div>'
+		                    +'<div class="qijiandian11">'
+		                    +    '<a href="#">'+value.descInfo+'</a>'
+		                    +'</div>'
+		                    +'<div class="send11">'
+		                    +    '<a href="#">自营</a>' 
+		                    +'</div>'
+		                    +'<div id="fm">'
+		                    +    '<form>'
+		                    +		 '<input type="hidden" value="'+value.productId+'" class="productId">'
+		                    +        '<input type="button" value="对比" class="duibi11">'
+		                    +        '<input type="button" value="关注" class="guanzhu11">'
+		                    +        '<input type="button" value="加入购物车"class="jia11">'
+		                    +    '</form>'
+		                    +'</div>' 
+		                    
+		                	+'</div>'
+		                	productInfomation+=productInfo;
+            			})
+            			$("#productshow").html(productInfomation);
+            			$(".kuang11").css("float","left");
+            		}
+            	})
+        	})
+        	
+        	$(function(){
+        		$(".kuang11").each(function(){
+        			$(this).click(function(){
+        				var id=$(this).find("input:first").val();
+        				window.location.href="../product/detailproduct.html?id="+id;
+        			});
+        		})
+        	})
+        	
+        	
+        </script>
+        
+    </head>
+    <body>
+<div id="wrapper">
+    <div id="top">
+        <div id="topleft">
+            <a href="#">京东主页</a>
+            <a href="#">广西</a>
+        </div>
+        <div id="topright">
+            <ul>
+                <a href="#" class="link-login">你好，请登录&nbsp;</a>
+                <a href="#" style="color: red">&nbsp;免费注册&nbsp;&nbsp;|&nbsp;</a>
+                <a href="#">&nbsp;我的订单&nbsp;&nbsp;|&nbsp;</a>
+                <a href="#">&nbsp;我的京东&nbsp;&nbsp;|&nbsp;</a>
+                <a href="#">&nbsp;京东会员&nbsp;&nbsp;|&nbsp;</a>
+                <a href="#">&nbsp;企业采购&nbsp;&nbsp;|&nbsp;</a>
+                <a href="#">&nbsp;客户服务&nbsp;&nbsp;|&nbsp;</a>
+                <a href="#">&nbsp;网站导航&nbsp;&nbsp;|&nbsp;</a>
+                <a href="#">&nbsp;京东会员&nbsp;</a>
+            </ul>
+            <br>
+        </div>
+    </div>
+<div id="head">
+    <div id="headleft">
+        <img src="pictures\jd.png"  width="210" height="96" id="jddog"/>
+    </div>
+    <div id="headright">
+        <form id="search">
+            <input type="text" id="hd1">
+            <input type="submit" value="搜索" style="color: white" id="hd2">
+        </form>
+    </div>
+    <div id="gwc">
+        <img src="pictures\gwc.png" width="141" height="37">
+    </div>
+    <div id="kind">
+        <ul>
+            <a href="#">电脑频道&nbsp;&nbsp;</a>
+            <a href="#">&nbsp;&nbsp;轻薄本&nbsp;&nbsp;</a>
+            <a href="#">&nbsp;&nbsp;吃鸡显示器&nbsp;&nbsp;</a>
+            <a href="#">&nbsp;&nbsp;免费试用&nbsp;&nbsp;</a>
+            <a href="#">&nbsp;&nbsp;办公优选&nbsp;&nbsp;</a>
+            <a href="#">&nbsp;&nbsp;私人订制&nbsp;&nbsp;</a>
+        </ul>
+        <br>
+    </div>
+    <div id="line">
+    </div>
+</div>
+<div id="downleft" style="text-align: center">
+    <a href="#">全部商品分类</a>
+</div>
+<div id="downright">
+        <a href="#">京东时尚</a>
+        <a href="#">美妆馆</a>
+        <a href="#">超市</a>
+        <a href="#">生鲜</a>
+        <a href="#">海囤全球</a>
+        <a href="#">闪购</a>
+        <a href="#">拍卖</a>
+        <a href="#">金融</a>
+</div>
+<div id="tuijian">
+    <img src="pictures\tuijian.png" width="1210" height="155"/>
+</div>
+<div id="mid1">
+    <a href="#" style="font-size: 18px">电脑、办公</a>
+</div>
+<div id="mid2">
+    <a href="#" style="font-size: 18px">&nbsp;>&nbsp&nbsp</a>
+    <a href="#" style="font-size: 12px">电脑配件</a>
+    <a href="#" style="font-size: 18px">&nbsp;>&nbsp&nbsp</a>
+    <a href="#" style="font-size: 12px">SSD固态硬盘</a>
+</div>
+<div id="midhead">
+</div>
+<div id="mdhleft">
+    <a href="#">SSD固态硬盘&nbsp;</a>
+</div>
+<div id="mdhmiddle">
+    <a href="#">商品筛选</a>
+</div>
+<div id="midright">
+    <a href="#">共17991个商品</a>
+</div>
+<div id="brand">
+    <a href="#">品牌：</a>
+</div>
+<div id="brandvalue">
+    <img src="pictures\brand.png" width="936" height="100"/>
+</div>
+<div id="dottedline1">
+</div>
+<div id="price">
+    <a href="#">价格：</a>
+</div>
+<div id="pricenum">
+    <a href="#">1-299</a>
+    <a href="#">300-499</a>
+    <a href="#">500-699</a>
+    <a href="#">700-999</a>
+    <a href="#">1000-1599</a>
+    <a href="#">1600以上</a>
+    <a href="#">惊爆清仓</a>
+</div>
+<div id="point">
+    <a href="#">-</a>
+</div>
+<div id="pricebuton">
+    <input type="text" id="pb1">
+    <input type="text" id="pb2">
+    <input type="submit" value="确定" style="color: black" id="pb3">
+</div>
+<div id="dottedline2">
+</div>
+<div id="interface">
+    <a href="#">接口：</a>
+</div>
+<div id="interfacename">
+    <a href="#">SATA接口</a>
+    <a href="#">M.2接口</a>
+    <a href="#" style="width: 150px">M.2接口（NVMe协议）</a>
+    <a href="#">MSATA接口</a>
+    <a href="#">PCI-E接口</a>
+    <a href="#">Type-c接口</a>
+    <a href="#">USB接口</a>
+    <a href="#">Macbook接口</a>
+    <a href="#">U.2接口</a>
+</div>
+<div id="dottedline3">
+</div>
+<div id="volume">
+    <a href="#">容量：</a>
+</div>
+<div id="volumenum">
+    <a href="#">120GB以下</a>
+    <a href="#">（120-128）GB</a>
+    <a href="#">（240-256）GB</a>
+    <a href="#">（480-512）GB</a>
+    <a href="#">（600-900）GB</a>
+    <a href="#">1TB及以上</a>
+    <a href="#">其他</a>
+</div>
+<div id="dottedline4">
+</div>
+<div id="family">
+        <a href="#">类别：</a>
+    </div>
+    <div id="familyname">
+        <a href="#">游戏电竞</a>
+        <a href="#">家用娱乐</a>
+        <a href="#">升级换代</a>
+        <a href="#">设计制图</a>
+        <a href="#">企业领域</a>
+        <a href="#">其他</a>
+    </div>
+    <div id="dottedline5"></div>
+    <div id="game">
+            <a href="#">游戏性能：</a>
+        </div>
+        <div id="gameq">
+            <a href="#">入门级</a>
+            <a href="#">发烧级</a>
+            <a href="#">骨灰级</a>
+        </div>
+        <div id="dottedline6"></div>
+        <div id="people">
+                <a href="#">大家说：</a>
+            </div>
+            <div id="peoplesay">
+                <a href="#">外观漂亮</a>
+                <a href="#">性价比高</a>
+                <a href="#">体积小</a>
+                <a href="#">超薄便携</a>
+                <a href="#">放心品牌</a>
+                <a href="#">读写速度快</a>
+                <a href="#">材质不错</a>
+                <a href="#">传输速度快</a>
+                <a href="#">外壳漂亮</a>
+            </div>
+            <div id="dottedline7"></div>
+            <div id="spselect">
+            </div>
+            <div id="spselect1">
+                    <a href="#">商品精选</a>
+            </div>
+            <div id="spselect2">
+                <a href="#">广告</a>
+            </div>
+            <div id="spselect3">
+            </div>
+            <div id="xl">
+                <a href="#">销量</a>
+            </div>
+            <div id="jg">
+                <a href="#">价格</a>
+            </div>
+            <div id="pls">
+                <a href="#">评论数</a>
+            </div>
+            <div id="sjsj">
+                <a href="#">上架时间</a>
+            </div>
+            <div id="shuzi">
+                <a href="#">1/300</a>
+            </div>
+            <div id="leftp">
+                <a href="#">&nbsp;<&nbsp;</a>
+            </div>
+            <div id="rightp">
+                <a href="#">&nbsp;>&nbsp;</a>
+            </div>
+            <div id="spselect4"></div>
+            <div id="psz">
+                    <a href="#">配送至</a>
+            </div>
+            <div id="psz1"></div>
+            <div id="pszcheck1">
+                <input type="checkbox" value="京东物流">
+                <a href="#" id="psc1">京东物流</a>
+            </div>
+            <div id="pszcheck2">
+                    <input type="checkbox" value="货到付款">
+                    <a href="#" id="psc2">货到付款</a>
+            </div>
+            <div id="pszcheck3">
+                    <input type="checkbox" value="仅显示有货">
+                    <a href="#" id="psc3">仅显示有货</a>
+            </div>
+            <div id="pszcheck4">
+                    <input type="checkbox" value="可配送全球">
+                    <a href="#" id="psc4">可配送全球</a>
+            </div>
+            <div id="spleft">
+                <img src="pictures\down1.jpg" width="190" height="190" id="spleft1"/>
+                <img src="pictures\down2.jpg" width="190" height="190" id="spleft2"/>
+                <img src="pictures\down3.jpg" width="190" height="190" id="spleft3"/>
+            </div>
+            <div id="word1">
+                <a href="#">数视达&nbsp;55英寸拼接屏三星超窄边框</br>液晶拼接屏安防监控高清led大屏幕</a>
+            </div>
+            <div id="word2">
+                    <a href="#">惠普&nbsp;(HP)&nbsp;E273q&nbsp;27英寸&nbsp;2K高清I</br>PS宽屏&nbsp;Type-C&nbsp;三面微边框显示器</a>
+            </div>
+            <div id="word3">
+                    <a href="#">数视达&nbsp;壁挂式广告机竖屏高清超薄</br>显示器楼宇电梯单机拔插U盘播放远</a>
+            </div>
+            <div id="num1">
+                <a href="#">?5480.00</a>
+            </div>
+            <div id="num2">
+                    <a href="#">?2299.00</a>
+                </div>
+            <div id="num3">
+                <a href="#">?1380.00</a>
+            </div>
+            <div id="send1">
+                <a href="#">赠品</a>
+            </div>
+            <div id="evaluate1">
+                <a href="#">已有0人评价</a>
+            </div>
+            <div id="evaluate2">
+                    <a href="#">已有2人评价</a>
+            </div>
+            <div id="evaluate3">
+                    <a href="#">已有155人评价</a>
+            </div>
+            <div id="productshow">
+                <!-- <div class="kuang11">
+                    <div class="spright">
+                        <img src="pictures\right11.jpg" width="220" height="220" id="spright11"/>
+                    </div>
+                    <div class="num11">
+                        <a href="#">￥529.00</a> 
+                    </div>
+                    <div class="word11">
+                        <a href="#">三星（SAMSUNG）&nbsp;500GB&nbsp;SSD固态硬盘</a>
+                    </div>
+                    <div class="evaluate11">
+                        <a href="#">已有55万+人评价</a>
+                    </div>
+                    <div class="qijiandian11">
+                        <a href="#">三星存储京东自营旗舰店</a>
+                    </div>
+                    <div class="send11">
+                        <a href="#">自营</a> 
+                    </div>
+                    <div id="fm">
+                        <form>
+                            <input type="button" value="对比" class="duibi11">
+                            <input type="button" value="关注" class="guanzhu11">
+                            <input type="button" value="加入购物车"class="jia11">
+                        </form>
+                    </div> 
+                </div> -->
+            </div>
+            
+</div>
+</body>
+</html>
