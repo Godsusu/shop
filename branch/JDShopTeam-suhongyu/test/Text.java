@@ -17,14 +17,12 @@ public class Text {
 	@Test
 	public void getOneProduct(){
 		String id="0dd142a4992147a99dd93013908cefb5";
-		try {
-			ICustomerService customerService=(ICustomerService) BeanFactory.getInstance().getBean("customerService");
-			Customer customer=customerService.selectCustomer(id);
-			System.out.println(JSON.toJSON(customer));
-		} catch (DaoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		String name="dsada";
+		
+		String url="permission?method=updatePermission&permissionId="+id+"&permissionname="+name;
+		
+		System.out.println(url);
+		
 	}
 	
 	
