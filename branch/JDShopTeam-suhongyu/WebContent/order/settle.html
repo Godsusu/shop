@@ -4,17 +4,26 @@
 
         <script src="../js/jquery-3.3.1.js"></script>
         <script>
+        $(function(){
+    		$.ajax({
+    			url:"../customer?method=getUserName",
+    			dataType:"json",
+    			success:function(data){
+    				if(data==null){
+    					
+    				}else
+    					$(".link-login").text(data);
+    			}
+    		})
+    	})
         	$(function(){
         		$.ajax({
         			url:'../shopping?method=getInfo',
    					success:function(data){
    						var totalmoney=0;
    						var productInfomation="";
-   						
    							var productInfomation="";
-   							
    		    				$.each(data,function(){
-   		    					
    		    					var product=this.product;
    		    					var money=parseFloat(product.price);
    		    					var num=parseInt(this.productNum);
@@ -63,6 +72,29 @@
                     $(".addAddress").fadeOut(200);
                     $(".bg").fadeOut(200);
                 })
+                
+                $(".cancel").click(function(){
+                	$(".addAddress").find("input").eq(0).val();
+                    $(".addAddress").fadeOut(200);
+                    $(".bg").fadeOut(200);
+                })
+                
+            })
+            
+            $(function(){
+            	$(".payfor").click(function(){
+            		window.location.href="../checkout/jdsyt.html";
+            		$.ajax({
+            			url:"../order?method=submitOrder",
+            			type:"POST",
+            			data:{"address":$(".addressInfo").text(),
+            				"ammount":$(".totalmoney").text(),
+            			},
+            			success:function(data){
+            				
+            			}
+            		})
+            	})
             })
            
         </script>
@@ -142,8 +174,10 @@
                 border: 1px solid rgb(167, 166, 166)
             }
             .message1{
-                width: 96%;height: 24%;
-                margin-top: 10px;margin-left: 2%;
+                width: 96%;
+                float:left;
+                margin-top: 10px;
+                margin-left: 2%;
                 border: 1px solid #8f8f8f;
                 border-top-color:rgba(0, 0, 0, 0);
                 border-left-color:rgba(0, 0, 0, 0);
@@ -194,7 +228,6 @@
             }
             #right{
                 width: 65%;
-                height: 85%;
                 float:right;
                 background-color: #dbfff3;
                 margin-top: 8px
@@ -207,7 +240,7 @@
                 border-collapse: collapse;
                 position:absolute;
                 margin-top:-1070px;
-                margin-left: 500px;
+                margin-left: 650px;
                 background: #ffffff;
                 padding-left: 110px;
                 z-index: 3;
@@ -215,12 +248,23 @@
             .saveAddress{
                 border: 2px solid rgb(255, 0, 0);
                 margin-top: -30px;
-                margin-left:20px;
-                width:200px;
+                margin-left:-40px;
+                width:150px;
                 height:50px;
                 color: rgb(231, 231, 231);
                 font-size:18px;
             }
+            
+            .cancel{
+            	border: 2px solid rgb(255, 0, 0);
+                margin-top: -30px;
+                margin-left:20px;
+                width:150px;
+                height:50px;
+                color: rgb(231, 231, 231);
+                font-size:18px;
+            }
+            
             .bg{
                 width: 100%;
                 height: 100%;
@@ -246,7 +290,7 @@
                     <li><a href="#">京东会员</a></li>
                     <li><a href="#">我的京东</a></li>
                     <li><a href="#">我的订单</a></li>
-                    <li><a href="#">你好，请登录</a></li>
+                    <li><a class="link-login" href="#">你好，请登录</a></li>
                 </ul>
             </div>
         </div>
@@ -278,7 +322,7 @@
                                 张三
                             </font>&nbsp;
                             <font style="font-size: 12px;">张三</font>&nbsp;&nbsp;
-                            <font style="font-size: 12px;">广西 桂林市 灵川县 灵川镇 灵田乡东田村桂林电子科技大学(花江校区）</font> &nbsp;&nbsp;
+                            <font style="font-size: 12px;" class="addressInfo">广西 桂林市 灵川县 灵川镇 灵田乡东田村桂林电子科技大学(花江校区）</font> &nbsp;&nbsp;
                             <font style="font-size: 12px;">123456</font>&nbsp;&nbsp;
                             <font style="font-size: 12px;">默认地址</font>
                         </div>
@@ -457,6 +501,7 @@
             </br>
             </br>
                 <input type="button" class="saveAddress" value="保存收货人信息" style="background-color: red"/>
+                <input type="button" class="cancel" value="取消" style="background-color: red"/>
             </div>
     </body>
 </html>

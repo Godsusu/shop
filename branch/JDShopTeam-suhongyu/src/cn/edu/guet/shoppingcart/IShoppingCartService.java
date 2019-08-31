@@ -11,5 +11,6 @@ public interface IShoppingCartService {
 	
 	List<ShoppingCart> selectShoppingCart(String customerId);
 	void updataShoppingCart(ShoppingCart shoppingCart);
-	List<ShoppingCart> getAllOrder();
+	List<ShoppingCart> getAllOrder(String customerId);
+	void delete(String shoppingcartId);
 }

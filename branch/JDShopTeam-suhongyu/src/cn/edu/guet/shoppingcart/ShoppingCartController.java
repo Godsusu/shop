@@ -44,6 +44,8 @@ public class ShoppingCartController extends BaseServlet {
 				s.setShoppingcartid(UUIDString.getId());
 				IShoppingCartService scs=(IShoppingCartService) new TransactionHandle().createProxyObject(new ShoppingCartServiceImpl());
 				
+				
+				
 				try {
 					scs.addProductToCart(s);
 				} catch (DaoException e) {
@@ -68,7 +70,6 @@ public class ShoppingCartController extends BaseServlet {
 		list=shoppingcartService.selectShoppingCart(customerId);
 		List<ProductModel> list1=new ArrayList<ProductModel>();
 		Iterator<ShoppingCart> iter=list.iterator();
-		System.out.println(JSON.toJSONString(list));
 		try {
 			while(iter.hasNext()){
 				ProductModel pm=new ProductModel();
@@ -102,9 +103,11 @@ public class ShoppingCartController extends BaseServlet {
     }
 	
     public void getInfo(HttpServletRequest request, HttpServletResponse response){
+		HttpSession session=request.getSession();
+    	String customerId=(String) session.getAttribute("customerid");
     	response.setContentType("application/json;charset=gbk");
     	IShoppingCartService shoppingcartService=(IShoppingCartService) BeanFactory.getInstance().getBean("shoppingCartService");
-    	List<ShoppingCart> list = shoppingcartService.getAllOrder();
+    	List<ShoppingCart> list = shoppingcartService.getAllOrder(customerId);
     	List<ProductModel> list1=new ArrayList<ProductModel>();
     	Iterator<ShoppingCart> iter=list.iterator();
     	System.out.println(JSON.toJSONString(list));

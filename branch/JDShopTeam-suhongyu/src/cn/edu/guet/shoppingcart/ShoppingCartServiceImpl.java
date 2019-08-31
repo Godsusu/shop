@@ -1,6 +1,7 @@
 package cn.edu.guet.shoppingcart;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.edu.guet.exception.DaoException;
@@ -35,9 +36,19 @@ public class ShoppingCartServiceImpl implements IShoppingCartService {
 		
 	}
 	@Override
-	public List<ShoppingCart> getAllOrder() {
+	public List<ShoppingCart> getAllOrder(String customerId) {
+		List<ShoppingCart> list=new ArrayList<ShoppingCart>();
+		list=iscd.getAllOrder(customerId);
+		return list;
+	}
+	@Override
+	public void delete(String shoppingcartId) {
+		try {
+			iscd.delete(shoppingcartId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
-		return iscd.getAllOrder();
 	}
 
 }

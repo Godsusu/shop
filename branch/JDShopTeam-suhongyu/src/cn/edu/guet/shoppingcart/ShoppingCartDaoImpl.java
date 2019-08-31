@@ -16,6 +16,7 @@ public class ShoppingCartDaoImpl extends BaseDaoImpl<ShoppingCart> implements IS
 	@Override
 	public List<ShoppingCart> selectAllProduct(String customerid) {
 		Connection conn=null;
+		
 		PreparedStatement pstmt=null;
 		conn=DBConnection.getConn();
 		ResultSet rs=null;
@@ -41,15 +42,16 @@ public class ShoppingCartDaoImpl extends BaseDaoImpl<ShoppingCart> implements IS
 	}
 
 	@Override
-	public List<ShoppingCart> getAllOrder() {
+	public List<ShoppingCart> getAllOrder(String customerId) {
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		conn=DBConnection.getConn();
 		ResultSet rs=null;
 		List<ShoppingCart> list=new ArrayList<ShoppingCart>();
 		try {			
-			String sql="SELECT * FROM shoppingcart WHERE ischoose='true'";
+			String sql="SELECT * FROM shoppingcart WHERE ischoose='true' AND customerid=?";
 			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1,customerId);
 			rs=pstmt.executeQuery();
 			while(rs.next()){
 				ShoppingCart shoppingCart=new ShoppingCart();

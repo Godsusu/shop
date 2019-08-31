@@ -46,8 +46,9 @@ public class ProductController extends BaseServlet {
 			Gson gson=new GsonBuilder()
 					.setDateFormat("yyyy-MM-dd")
 					.create();
+			int currentPage=1;
 			IProductService productService=(IProductService) BeanFactory.getInstance().getBean("productService");
-			PageModel<Product> pm=productService.getAllProduct(1);
+			PageModel<Product> pm=productService.getAllProduct(currentPage);
 			response.setContentType("application/json;charset=GBK");
 			PrintWriter out=response.getWriter();
 			out.write(gson.toJson(pm));

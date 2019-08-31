@@ -10,8 +10,6 @@
     				if($(this).prop('checked')){
     					var shoppingcartid=$(this).parent().find("input").eq(2).val();
     					var productNum=$(this).parent().find("input").eq(1).val();
-    					alert(shoppingcartid);
-    					alert(productNum);
     					$.ajax({
     						url:"../shopping?method=updateShoppingcart",
     						data:{"shoppingcartid":shoppingcartid,"productNum":productNum},
@@ -78,6 +76,20 @@
 		    document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString(); 
 		    document.cookie =  + "="+ escape (value) + ";expires=" + exp.toGMTString();
 		} 
+    	$(function(){
+    		
+    		$(".reduce").click(function(){
+    			var number=$(this).parent().find("input").eq(0).val();
+    			parseInt(number);
+    			number-=1;
+    			$(this).parent().find("input").eq(0).val(number);
+    		})
+    		$(".plus").click(function(){
+    			var number=$(this).parent().find("input").eq(0).val();
+    			number=parseInt(number)+1;
+    			$(this).parent().find("input").eq(0).val(number);
+    		})
+    	})
     </script>
 </head>
 <body>
