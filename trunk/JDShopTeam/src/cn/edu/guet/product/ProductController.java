@@ -3,6 +3,7 @@ package cn.edu.guet.product;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,6 +21,7 @@ import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.junit.Test;
 import org.lanqiao.util.PageModel;
 import org.lanqiao.util.TransactionHandle;
 
@@ -44,8 +46,9 @@ public class ProductController extends BaseServlet {
 			Gson gson=new GsonBuilder()
 					.setDateFormat("yyyy-MM-dd")
 					.create();
+			int currentPage=1;
 			IProductService productService=(IProductService) BeanFactory.getInstance().getBean("productService");
-			PageModel<Product> pm=productService.getAllProduct(1);
+			PageModel<Product> pm=productService.getAllProduct(currentPage);
 			response.setContentType("application/json;charset=GBK");
 			PrintWriter out=response.getWriter();
 			out.write(gson.toJson(pm));
@@ -172,15 +175,65 @@ public class ProductController extends BaseServlet {
 		PrintWriter out=null;
 		response.setContentType("text/plain;charset=gbk");
 		try {
-			String productId="ed976bcbcf2f4f06a1111013b2434147";
+			String productId=request.getParameter("productId");
 			IProductService productService=(IProductService) BeanFactory.getInstance().getBean("productService");
 			Product product=productService.getOneProduct(productId);
 			System.out.println(JSON.toJSONString(product));
+			out=response.getWriter();
+			out.write(JSON.toJSONString(product));
+			out.flush();
+			out.close();
 		} catch (DaoException e) {
 			e.printStackTrace();
-		}
-		
-		
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
 	}
+	
+	public void selectCategoryID(HttpServletRequest request, HttpServletResponse response){
+		String categoryName=null;
+		response.setContentType("text/plain;charset=utf-8");
+		PrintWriter out=null;
+		try {
+			categoryName = new String(request.getParameter("categoryName").getBytes("iso-8859-1"),"utf-8");
+			IProductService productService=(IProductService) BeanFactory.getInstance().getBean("productService");
+			String categoryid=productService.selectCategoryID(categoryName);
+			out=response.getWriter();
+			out.write(categoryid);
+			out.flush();
+			out.close();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (DaoException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void viewAllProduct(HttpServletRequest request, HttpServletResponse response){
+		String categoryId;
+		response.setContentType("application/json;charset=utf-8");
+		
+		PrintWriter out=null;
+		try {
+			categoryId = new String(request.getParameter("categoryid").getBytes("iso-8859-1"),"utf-8");
+			IProductService productService=(IProductService) BeanFactory.getInstance().getBean("productService");
+			List<Product> list=productService.selectAllProduct(categoryId);
+			out=response.getWriter();
+			out.write(JSON.toJSONString(list));
+			out.flush();
+			out.close();
+		} catch (DaoException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+
 	
 }

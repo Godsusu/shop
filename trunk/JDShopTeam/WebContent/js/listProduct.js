@@ -1,7 +1,10 @@
+//var currentPage;
+//var totalPage;
+
 $(function(){
     $(".search-product").click(function(){
     	$(".product-info").empty();
-        $.getJSON("product?method=viewProduct",function(data){	
+        $.getJSON("product?method=viewProduct&currentPage=1",function(data){	
             $.each(data["list"],function(index,obj){
                 var tr=$("<tr>")
                 .append($("<td>").text(obj.productId))
@@ -9,7 +12,7 @@ $(function(){
                 .append($("<td>").text(obj.price))
                 .append($("<td>").text(obj.onlineDate))
                 .append($("<td>").text(obj.descInfo))
-                .append($("<td>").html('<img width="200px" height="150px" src="http://localhost:8080/JDShop/upload/'+obj.picurl+'"/>'));
+                .append($("<td>").html('<img width="200px" height="150px" src="http://localhost:8080/JDShopTeam/upload/'+obj.picurl+'"/>'));
                 
                 
                 var $operationtd=$("<td>");
@@ -47,7 +50,7 @@ function deleteProduct(a){
 	})
 }
 
-function updateProduct(a){   //update´«ÈëÊý¾Ý
+function updateProduct(a){   //updateï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	var productid=$(a).parent().parent().find("td:first").text();
 	var productName=$(a).parent().parent().find("td").eq(1).text();
 	var productPrice=$(a).parent().parent().find("td").eq(2).text();
@@ -67,7 +70,7 @@ function updateProduct(a){   //update´«ÈëÊý¾Ý
 	$(".submit-product-info").attr("onclick","updataInfo('updateProductInfo')");
 }
 
-function updataInfo(method){    //updataºÍaddÌá½»Êý¾Ý
+function updataInfo(method){    //updataï¿½ï¿½addï¿½á½»ï¿½ï¿½ï¿½ï¿½
 	$(".bg").fadeOut(200);
 	$(".update-product-info").fadeOut(200);
 	$(".add-product-info").fadeOut(200);
@@ -96,7 +99,7 @@ function cancel(){
 	$(".add-product-info").fadeOut(200);
 }
 
-$(function(){                //Ìí¼ÓÓÃ»§°´Å¥
+$(function(){                //ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Å
 	$(".add-product").click(function(){
 		$(".bg").fadeIn(200);
 		$(".add-product-info").fadeIn(200);
@@ -104,6 +107,68 @@ $(function(){                //Ìí¼ÓÓÃ»§°´Å¥
 	})
 })
 
-  
+/* function pageTurn(a){
+	$('.bg').fadeIn(100);
+    $('#locallogo').fadeIn(200); 
+	if(a==1){
+		currentPage=1;
+	}
+	else if(a==2){
+		currentPage-=1;
+	}
+	else if(a==3){
+		currentPage+=1;
+	}
+	else if(a==4){
+		currentPage=totalPage;
+	}
+	if(currentPage==totalPage){
+		$('input[value="å°¾é¡µ"]').attr("disabled",true);
+		$('input[value="ä¸‹ä¸€é¡"]').attr("disabled",true);
+		$('input[value="ä¸Šä¸€é¡"]').attr("disabled",false);
+		$('input[value="é¦–é¡µ"]').attr("disabled",false);
+	}
+	else if(currentPage==1){
+		$('input[value="ä¸Šä¸€é¡"]').attr("disabled",true);
+		$('input[value="é¦–é¡µ"]').attr("disabled",true);
+		$('input[value="å°¾é¡µ"]').attr("disabled",false);
+		$('input[value="ä¸‹ä¸€é¡"]').attr("disabled",false);
+	}
+	
+   	$.ajax({
+		url:"product?method=viewProduct&currentPage="+currentPage,
+		//async : false,
+		dataType:"json",
+		contentType: "application/x-www-form-urlencoded; charset=GBK",
+		success : function(data) {
+			$.each(data["list"],function(index,obj){
+                var tr=$("<tr>")
+                .append($("<td>").text(obj.productId))
+                .append($("<td>").text(obj.name))
+                .append($("<td>").text(obj.price))
+                .append($("<td>").text(obj.onlineDate))
+                .append($("<td>").text(obj.descInfo))
+                .append($("<td>").html('<img width="200px" height="150px" src="http://localhost:8080/JDShop/upload/'+obj.picurl+'"/>'));
+                
+                
+                var $operationtd=$("<td>");
+                var $operationdel=$("<a>");
+                var $operationupd=$("<a>");
+                $operationdel.text("É¾ï¿½ï¿½");
+                $operationdel.attr("href","javascript:void(0)");
+                $operationdel.attr("onclick","deleteProduct(this)");
+                $operationtd.append($operationdel);
+                $operationupd.text("ï¿½Þ¸ï¿½");
+                $operationupd.attr("href","javascript:void(0)");
+                $operationupd.attr("onclick","updateProduct(this)");
+                $operationtd.append($operationupd);
+                
+                tr.append($operationtd);
+                
+                $(".product-info").append(tr);
+            })
+		}
+	});
+ }*/
 
 

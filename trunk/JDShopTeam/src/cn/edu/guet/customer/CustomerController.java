@@ -2,15 +2,21 @@ package cn.edu.guet.customer;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.UUID;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.lanqiao.util.SendEmail;
 import org.lanqiao.util.TransactionHandle;
 
+import com.alibaba.fastjson.JSON;
+
 import cn.edu.guet.exception.DaoException;
+import cn.edu.guet.ioc.BeanFactory;
 import cn.edu.guet.web.servlet.base.BaseServlet;
 
 public class CustomerController extends BaseServlet {
@@ -99,5 +105,64 @@ public class CustomerController extends BaseServlet {
 			e.printStackTrace();
 		}
 	}
+	public void selectCustomer(HttpServletRequest request, HttpServletResponse response){  //判断邮箱验证码是否正确以及注册
+		String id="0dd142a4992147a99dd93013908cefb5";
+		try {
+			ICustomerService customerService=(ICustomerService) BeanFactory.getInstance().getBean("customerService");
+			Customer customer=customerService.selectCustomer(id);
+			
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void checkCustomer(HttpServletRequest request, HttpServletResponse response){
+		String user=request.getParameter("user");	
+		String password=request.getParameter("password");
+		response.setContentType("text/plain;charset=gbk");
+		PrintWriter out=null;
+		ICustomerService customerService=(ICustomerService) BeanFactory.getInstance().getBean("customerService");
+		try {
+			
+			Customer customer=customerService.checkCustomer(user);
+			if(customer!=null){
+				if(password.equals(customer.getPassword())){
+					HttpSession session=request.getSession();
+					session.setAttribute("customerName", customer.getUsername());
+					session.setAttribute("customerid", customer.getCustomerId());
+					out=response.getWriter();
+					out.write("true");
+				}else{
+					out=response.getWriter();
+					out.write("密码错误");
+				}
+				
+			}else{
+				out=response.getWriter();
+				out.write("账号不存在");
+			}
+			out.flush();
+			out.close();
+		} catch (DaoException | IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void getUserName(HttpServletRequest request, HttpServletResponse response){
+		try {
+			PrintWriter out=null;
+			response.setContentType("application/json;charset=gbk");
+			out=response.getWriter();
+			HttpSession session=request.getSession();
+			out.write(JSON.toJSONString(session.getAttribute("customerName")));
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 	
 }

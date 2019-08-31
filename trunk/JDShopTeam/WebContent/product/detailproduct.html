@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="../css/jd.css">
+	<script src="../js/jquery-3.3.1.js"></script>
+	<script>
+		$(function(){
+			$.ajax({
+				url:"../customer?method=getUserName",
+				dataType:"json",
+				success:function(data){
+					if(data==null){
+						
+					}else
+						$(".link-login").text(data);
+				}
+			})
+		})
+		$(function(){
+    		var url=window.location.href;
+        	var productid=url.split("?")[1].split("=")[1];
+        	$.ajax({
+        		url:"../product?method=viewOneProduct&productId="+productid,
+        		dataType:"JSON",
+      			async:false,
+        		success:function(data){
+        			$("#PIC").attr("src","../upload/"+data.picurl);
+        			$(".jiage").text(data.price);
+        			$(".sams-intro").text(data.descInfo);
+        			$(".productname").text(data.name);
+        		}
+        	})
+		})
+		
+		$(function(){
+			$(".jr-1").click(function(){	
+				var url=window.location.href;
+				var productid=url.split("?")[1].split("=")[1];
+				var productnumber=$(".number").val();
+				window.location.href="../shoppingcart/jdShoppingCart.html?productId="+productid+"&productnumber="+productnumber;			
+						} 					
+				)			
+			})		
+		
+	</script>
+
+	
+	<script type="text/javascript"> 
+	function getRTime(){ 
+	var EndTime= new Date('2019/8/1 23:00:00'); //截止时间 
+	var NowTime = new Date(); 
+	var t = EndTime.getTime() - NowTime.getTime(); 
+
+	var h = Math.floor(t/1000/60/60%24); 
+	var m = Math.floor(t/1000/60%60); 
+	var s = Math.floor(t/1000%60); 
+
+
+	document.getElementById("t_h").innerHTML = h + "时"; 
+	document.getElementById("t_m").innerHTML = m + "分"; 
+	document.getElementById("t_s").innerHTML = s + "秒"; 
+	} 
+	setInterval(getRTime,1000); 
+	</script> 
+
+	<style>
+		.search{
+		width: 580px;
+		height: 32px;
+		float: left;
+		}
+		.input_text{
+		width: 400px;
+		height: 30px;
+		border: 2px solid red;
+		padding: 0px;
+		float: left;
+		}
+		.input_sub1{
+		width: 60px;
+		height: 34px;
+		border:none;	
+		padding: 0px;
+		float: left;
+		background-color:#B61D1D; 
+		}
+		.input_sub2{
+		width: 60px;
+		height: 34px;
+		border:none;
+		background-color:rgb(70,78,92); 
+		padding: 0px;
+		float: left;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="head">
+		<div class="head-l">
+			<a href="#">京东首页</a>&nbsp;&nbsp;<a href="#">广西</a>
+		</div>
+		<div class="head-r">
+			<a href="#" class="link-login">你好，请登录</a>&nbsp;<a href="javascript:regist();" style="color: red">免费注册</a>&nbsp;&nbsp;
+			<a href="#">我的订单</a>&nbsp;|&nbsp;
+			<a href="#">我的京东</a>&nbsp;|&nbsp;
+			<a href="#">京东会员</a>&nbsp;|&nbsp;
+			<a href="#">企业采购</a>&nbsp;|&nbsp;
+			<a href="#">客户服务</a>&nbsp;|&nbsp;
+			<a href="#">网站导航</a>&nbsp;|&nbsp;
+			<a href="#">手机京东</a>&nbsp;&nbsp;
+		</div>
+		<br>&nbsp;
+	</div>
+
+	<div class="w1">
+		<div class="dog">
+			<a href="#"><img src="images/jd.jpg"></a>
+		</div>
+		<div class="fen">
+			<a href="#">全部分类</a>
+		</div>
+		<div class="form">
+			<form class="search">
+				<input type="text" class="input_text" placeholder="轻薄本">
+				<input type="submit" value="搜全站" style="color: white" class="input_sub1">
+				<input type="submit" value="搜本店" style="color: white" class="input_sub2">
+			</form>
+		</div>
+		<div class="gwc">
+			<a href="#"><img src="images/gwc.jpg"></a>
+		</div>
+	</div>
+
+	<div class="w2"><img src="images/samsung.jpg" style="width: 1650px;height: 110px;"></div>
+	<div class="sy">
+		|<a href="#">首页</a>|
+		<a href="#">热销产品</a>|
+		<a href="#">固态硬盘</a>|
+		<a href="#">移动固态硬盘</a>|
+		<a href="#">存储卡</a>|
+		<a href="#">内存盘</a>|
+	</div>
+	<div class="dn">
+		<a href="javascript:void(0)" class="productname"></a>	
+	</div>
+	<div class="bian">
+		<img id="PIC"  width="400" height="320">
+	</div>
+	<!-- <div class="bian-1" onmouseover="picture(1)">
+		<img src="images/sams01.jpg" style="max-width: 100%;
+		max-height: auto;">
+	</div>
+	<div class="bian-2" onmouseover="picture(2)">
+		<img src="images/sams02.jpg" style="max-width: 100%;
+		max-height: auto;">
+	</div>
+	<div class="bian-3" onmouseover="picture(3)">
+		<img src="images/sams03.jpg" style="max-width: 100%;
+		max-height: auto;">
+	</div>
+	<div class="bian-4" onmouseover="picture(4)">
+		<img src="images/sams04.jpg" style="max-width: 100%;
+		max-height: auto;">
+	</div>
+	<div class="bian-5" onmouseover="picture(5)">
+		<img src="images/sams05.jpg" style="max-width: 100%;
+		max-height: auto;">
+	</div> -->
+	<div id="gfd" style="margin-top: 520px;margin-left: 200px;position: absolute">
+		<a href="#">关注</a>
+		<a href="#">分享</a>
+		<a href="#">对比</a>
+	</div>
+	<div id="yh">
+		<a href="#">企业购更优惠</a>
+	</div>
+	<div class="product-intro">
+		<div class="sams-intro">
+		三星(SAMSUNG) 500GB SSD固态硬盘 SATA3.0接口 860 EVO (MZ-76E500B)
+		</div>
+		<div class="miaosha">
+			<div class="aa" style="color: white;text-decoration:none;position: absolute;">京东秒杀</div>
+			<div class="bb" style="color: white;text-decoration: none;margin-left: 520px;font-size: 12px;position: absolute;">距离结束</div>
+			<div id="CountMsg" class="HotDate" style="margin-left: 580px;height: 32px;
+			    line-height: 32px;width:110px;font-size: 12px;position: absolute;"> 
+			<span id="t_h" style="color: white">00时</span> 
+			<span id="t_m" style="color: white">00分</span> 
+			<span id="t_s" style="color: white">00秒</span> 
+			</div> 
+		</div>
+		<div class="da" style="font-size: 12px;color: #666;">
+			<div class="db" style="margin-top: 5px;position: absolute;color: #666;">秒 杀 价</div>
+			<div class="dc" style="position: absolute;">
+				<span class="dc-1" style="margin-left: 70px">
+					<span>¥</span>
+					<span class="jiage" style="font-size: 22px;color: #e4393c;">529.00</span>
+				</span>
+				<span class="dc-2">
+					[<del id="price" style="margin-top: 5px;margin-left: 3px;">¥549</del>]
+				</span>
+				<a href="#" class="dc-3" style="margin-top: 10px;margin-left: 3px;text-decoration: none;">降价通知</a> 
+			</div>
+			<div class="dd" style="margin-left: 640px;position: absolute;">
+				<div class="dd-1" style="margin-top: 5px;">累计评价</div>
+				<a href="#" style="font-size: 10px;margin-top: 25px;margin-left: 3px;text-decoration: none;">55万+</a>
+			</div>
+			<div class="de" style="margin-top: 45px; position: absolute;line-height: 18px;">
+				<span class="de-1" style="margin-left:10px;">促　　销</span>
+				<span class="de-2" style="margin-left:10px;color: red">换购</span>
+				<span class="de-3" style="margin-left:10px;">购买1件可优惠换购热销商品 立即换购 >></span>
+			</div>
+		</div>
+		<div class="ea" style="color: #666;font-size: 12px;">
+			<div class="eb" style="height: 32px;line-height: 32px;">
+				<span class="eb-1" style="margin-left:5px">增值业务</span>
+				<a href="#" style="color: #666;text-decoration: none;font-size: 10px">以旧换新,卖了换钱</a>
+			</div>
+			<div class="ec" style="height: 100px;line-height: 32px;">
+				<span class="ec-1" style="margin-left:10px;">配 送 至</span>
+				<input type="" value="广西桂林市灵川县青狮潭镇">
+				<span class="ec-2" style="margin-left:10px;">有货</span>
+				<span class="ec-3" style="margin-left:10px;">支持</span>
+				<span class="ec-4" style="margin-left:10px;">次日达</span>
+				<span class="ec-5" style="margin-left:10px;">自提</span>
+				<span class="ec-6" style="margin-left:10px;">99元免基础运费(10kg内)</span>
+				<span class="ec-7" style="margin-left:10px;margin-top: 30px"></span>
+				<div class="ec-8" style="margin-left:60px; position: absolute;line-height: 18px;height: 30px;">由 京东 发货, 供应商提供售后服务. 23:00前下单，预计明天(08月01日)送达</div>
+				<div class="ec-9" style="margin-left:10px;line-height: 18px;height: 40px;position: absolute;margin-top: 40px">重　　量 0.085kg</div>			
+			</div>
+			<div class="xuxian-1" style="height: 0;overflow: hidden;border-bottom: 1px dotted #dfdfdf;margin-bottom: 15px;"></div>
+			<!-- <div class="choo-ys" style="height: 200px;line-height: 32px;">
+				<div class="ys" style="margin-left:10px;line-height: 18px;height: 40px;position: absolute;margin-top: 20px">选择颜色</div>
+				<div class="ys-1" style="height: 40px;width:220px;line-height: 40px;margin-left:70px;position: absolute;border: 1px solid">
+
+					<div class="ys-1-1" style="height: 100%;width: auto;position: absolute;"><img src="images/xz01.jpg""></div>
+					<div class="ys-1-2" style="background: rgb(241,241,241);height: 100%;margin-left: 42px;"><a href="none" style="text-decoration: none;color: #666;">970 EVO Plus｜探索NVMe无限潜力</a></div>
+					
+				</div>
+				<div class="ys-2" style="height: 40px;width:220px;line-height: 40px;margin-left:300px;position: absolute;border: 1px solid">	
+					<div class="ys-2-1" style="height: 100%;width: auto;position: absolute;"><img src="images/xz02.jpg"></div>
+					<div class="ys-2-2" style="background: rgb(241,241,241);height: 100%;margin-left: 42px;"><a href="none" style="text-decoration: none;color: #666;">860 EVO｜稳定/兼容让信赖变依赖</a></div>	
+				</div>
+				<div class="ys-3" style="height: 40px;width:200px;line-height: 40px;margin-left:70px;position: absolute;border: 1px solid;margin-top: 50px">	
+					<div class="ys-2-1" style="height: 100%;width: auto;position: absolute;"><img src="images/xz03.jpg"></div>
+					<div class="ys-2-2" style="background: rgb(241,241,241);height: 100%;margin-left: 42px;"><a href="none" style="text-decoration: none;color: #666;">860 PRO｜守候MLC颗粒的孤傲</a></div>
+				</div>
+				<div class="ys-4" style="height: 40px;width:200px;line-height: 40px;margin-left:280px;position: absolute;border: 1px dashed;margin-top: 50px">	
+					<div class="ys-2-1" style="height: 100%;width: auto;position: absolute;"><img src="images/xz04.jpg"></div>
+					<div class="ys-2-2" style="background: rgb(241,241,241);height: 100%;margin-left: 42px;"><a href="none" style="text-decoration: none;color: #666;">【新品】860 QVO｜让TB容量普及</a></div>
+				</div>
+				<div class="ys-5" style="height: 40px;width:180px;line-height: 40px;margin-left:490px;position: absolute;border: 1px solid;margin-top: 50px">	
+					<div class="ys-2-1" style="height: 100%;width: auto;position: absolute;"><img src="images/xz05.jpg"></div>
+					<div class="ys-2-2" style="background: rgb(241,241,241);height: 100%;margin-left: 42px;"><a href="none" style="text-decoration: none;color: #666;">860 EVO｜mSATA接口</a></div>
+				</div>
+				<div class="ys-6" style="height: 40px;width:210px;line-height: 40px;margin-left:70px;position: absolute;border: 1px dashed;margin-top: 100px">
+					<div class="ys-2-1" style="height: 100%;width: auto;position: absolute;"><img src="images/xz06.jpg"></div>
+					<div class="ys-2-2" style="background: rgb(241,241,241);height: 100%;margin-left: 42px;"><a href="none" style="text-decoration: none;color: #666;">860 EVO｜M.2接口（SATA总线）</a></div>
+				</div>	
+				<div class="ys-7" style="height: 40px;width:240px;line-height: 40px;margin-left:290px;position: absolute;border: 1px solid;margin-top: 100px">	
+					<div class="ys-2-1" style="height: 100%;width: auto;position: absolute;"><img src="images/xz07.jpg"></div>
+					<div class="ys-2-2" style="background: rgb(241,241,241);height: 100%;margin-left: 42px;"><a href="none" style="text-decoration: none;color: #666;">970 EVO｜在性能的路上探索进取</a></div>
+				</div>
+				<div class="ys-8" style="height: 40px;width:240px;line-height: 40px;margin-left:70px;position: absolute;border: 1px solid;margin-top: 150px">
+					<div class="ys-2-1" style="height: 100%;width: auto;position: absolute;"><img src="images/xz08.jpg"></div>
+					<div class="ys-2-2" style="background: rgb(241, 241, 241);height: 100%;margin-left: 42px;"><a href="none" style="text-decoration: none;color: #666;">970 PRO｜惊艳性能只愿为MLC绽放</a></div>
+				</div>
+			</div> -->
+			<div class="choo-bb" style="height: 45px;line-height: 32px;">
+				<div class="bb" style="margin-left:10px;line-height: 18px;height: 35px;position: absolute;margin-top: 10px">选择版本</div>
+				<div class="bb-1" style="height: 35px;width:100px;line-height: 40px;margin-left:70px;position: absolute;border: 1px solid">
+					<a href="none" style="text-decoration: none;color: #666;">【250G/256G】</a>
+				</div>
+				<div class="bb-1" style="height: 35px;width:100px;line-height: 35px;margin-left:180px;position: absolute;border: 1px solid">
+					<a href="none" style="text-decoration: none;color: #666;">【500G/512G】</a>
+				</div>
+				<div class="bb-1" style="height: 35px;width:90px;line-height: 35px;margin-left:290px;position: absolute;border: 1px solid">
+						<a href="none" style="text-decoration: none;color: #666;margin-left: 20px">【1TB】</a>
+				</div>
+				<div class="bb-1" style="height: 35px;width:90px;line-height: 35px;margin-left:390px;position: absolute;border: 1px solid">
+						<a href="none" style="text-decoration: none;color: #666;margin-left: 20px">【2TB】</a>
+				</div>
+				<div class="bb-1" style="height: 35px;width:90px;line-height: 35px;margin-left:490px;position: absolute;border: 1px solid">
+						<a href="none" style="text-decoration: none;color: #666;margin-left: 20px">【4TB】</a>
+				</div>
+			</div>
+			<div class="zzbz" style="height: 45px;line-height: 32px;">
+				<div class="bz" style="margin-left:10px;line-height: 18px;height: 35px;position: absolute;margin-top: 10px">增值保障</div>
+				<div class="bb-1" style="height: 35px;width:130px;line-height: 35px;margin-left:70px;position: absolute;border: 1px solid">
+					<a href="none" style="text-decoration: none;color: #666;margin-left: 20px">全保换2年 ¥49</a>
+				</div>
+				<div class="bb-1" style="height: 35px;width:130px;line-height: 35px;margin-left:210px;position: absolute;border: 1px solid">
+					<a href="none" style="text-decoration: none;color: #666;margin-left: 20px">延长保2年 ¥19</a>
+				</div>
+				<div class="bb-1" style="height: 35px;width:130px;line-height: 35px;margin-left:350px;position: absolute;border: 1px solid">
+					<a href="none" style="text-decoration: none;color: #666;margin-left: 20px">标准版安装 ¥198</a>
+				</div>
+			</div>
+			<div class="jdfw" style="height: 45px;line-height: 32px;">
+				<div class="fw" style="margin-left:10px;line-height: 18px;height: 35px;position: absolute;margin-top: 10px">京东服务</div>
+				<div class="bb-1" style="height: 35px;width:140px;line-height: 35px;margin-left:70px;position: absolute;border: 1px solid">
+					<a href="none" style="text-decoration: none;color: #666;margin-left: 20px">一年数据救援 ¥48</a>
+				</div>
+			</div>
+			<div class="choo-baoz" style="height: 45px;line-height: 32px;">
+				<div class="baoz" style="margin-left:10px;line-height: 18px;height: 35px;position: absolute;margin-top: 10px">白条分期</div>
+				<div class="bb-1" style="height: 35px;width:50px;line-height: 35px;margin-left:70px;position: absolute;border: 1px solid">
+					<a href="none" style="text-decoration: none;color: #666;margin-left: 5px">不分期</a>
+				</div>
+				<div class="bb-1" style="height: 35px;width:120px;line-height: 35px;margin-left:130px;position: absolute;border: 1px solid">
+					<a href="none" style="text-decoration: none;color: #666;margin-left: 20px">¥185.75起x3期</a>
+				</div>
+				<div class="bb-1" style="height: 35px;width:120px;line-height: 35px;margin-left:260px;position: absolute;border: 1px solid">
+					<a href="none" style="text-decoration: none;color: #666;margin-left: 20px">¥94.25起x6期</a>
+				</div>
+				<div class="bb-1" style="height: 35px;width:120px;line-height: 35px;margin-left:390px;position: absolute;border: 1px solid">
+					<a href="none" style="text-decoration: none;color: #666;margin-left: 20px">¥48.5起x12期</a>
+				</div>
+				<div class="bb-1" style="height: 35px;width:120px;line-height: 35px;margin-left:520px;position: absolute;border: 1px solid">
+					<a href="none" style="text-decoration: none;color: #666;margin-left: 20px">¥25.51起x24期</a>
+				</div>
+			</div>
+			<div class="xuxian-2" style="height: 0;overflow: hidden;border-bottom: 1px dotted #dfdfdf;margin-bottom: 15px;"></div>
+			<div class="jrgwc" style="height: 55px;line-height: 32px;">
+				<input class="number" type="text" value="数量" style="width:50px; height:45px; margin-left: 20px;text-decoration: none;line-height: 50px;position: absolute;color: black"/>
+			
+				<!-- <div class="jr" style="margin-left:10px;line-height: 18px;width:70px;height: 51px;position: absolute;border: 1px solid grey">
+					<div id="jia" style="background: rgb(241,241,241);height:25px;width:25px;margin-left: 45px;border-width:1px 1px 1px 1px;border-style: none solid solid solid;border-color: grey">
+						<a href="none" style="line-height: 20px;color: black;margin-left: 10px;text-decoration: none">+</a>
+					</div>
+					<div id="jian" style="background: rgb(241,241,241);height:25px;width:25px;margin-left: 45px;border-width:1px 1px 1px 1px;border-style: none solid solid solid;border-color: grey">
+						<a href="none" style="line-height: 20px;color: black;margin-left: 10px;text-decoration: none">-</a>
+					</div>
+				</div> -->
+				<div class="jr-1" style="height: 50px;width:140px;line-height: 35px;margin-left:90px;position: absolute;background:#e4393c; ">
+					<a href="javascript:void(0)" style="text-decoration: none;color:white;margin-left: 20px;font-size: 18px;line-height: 50px;font-family: "microsoft yahei";">加入购物车</a>
+					
+				</div>
+			</div>
+		</div>
+		<div id="ts" style="margin-top: 10px;">
+			<span id="ts-1" style="color: #666;margin-left: 20px;font-size: 12px">温馨提示 ·支持7天无理由退货 ·此商品不可使用京券东券</a>
+		</div>
+		
+	</div>
+</body>
+</html>

@@ -25,4 +25,12 @@
 		<property name="roleDao" ref="roleDao"></property>
 	</bean>
 	<bean id="userDao" class="cn.edu.guet.users.UserDaoImpl"></bean>
+	
+	<bean id="shoppingCartService" class="cn.edu.guet.shoppingcart.ShoppingCartServiceImpl">
+		<property name="iscd" ref="shoppingCartDao"></property>
+	</bean>
+	
+	<bean id="shoppingCartDao" class="cn.edu.guet.shoppingcart.ShoppingCartDaoImpl"></bean>
+	
+	
 </beans>
