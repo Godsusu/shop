@@ -12,7 +12,7 @@
 				dataType:"json",
 				success:function(data){
 					if(data==null){
-						
+						window.location.href="../customer?method=customerLogin";
 					}else
 						$(".link-login").text(data);
 				}
@@ -196,7 +196,7 @@
 			<div class="dc" style="position: absolute;">
 				<span class="dc-1" style="margin-left: 70px">
 					<span>¥</span>
-					<span class="jiage" style="font-size: 22px;color: #e4393c;">529.00</span>
+					<span class="jiage" style="font-size: 22px;color: #e4393c;"></span>
 				</span>
 				<span class="dc-2">
 					[<del id="price" style="margin-top: 5px;margin-left: 3px;">¥549</del>]
@@ -324,7 +324,7 @@
 			</div>
 			<div class="xuxian-2" style="height: 0;overflow: hidden;border-bottom: 1px dotted #dfdfdf;margin-bottom: 15px;"></div>
 			<div class="jrgwc" style="height: 55px;line-height: 32px;">
-				<input class="number" type="text" value="数量" style="width:50px; height:45px; margin-left: 20px;text-decoration: none;line-height: 50px;position: absolute;color: black"/>
+				<input class="number" type="text" value="1" style="width:50px; height:45px; margin-left: 20px;text-decoration: none;line-height: 50px;position: absolute;color: black"/>
 			
 				<!-- <div class="jr" style="margin-left:10px;line-height: 18px;width:70px;height: 51px;position: absolute;border: 1px solid grey">
 					<div id="jia" style="background: rgb(241,241,241);height:25px;width:25px;margin-left: 45px;border-width:1px 1px 1px 1px;border-style: none solid solid solid;border-color: grey">

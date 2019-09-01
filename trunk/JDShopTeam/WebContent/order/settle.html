@@ -1,7 +1,6 @@
 <html>
     <head>
         <meta charset:GBK>
-
         <script src="../js/jquery-3.3.1.js"></script>
         <script>
         $(function(){
@@ -10,106 +9,130 @@
     			dataType:"json",
     			success:function(data){
     				if(data==null){
-    					
+    					window.location.href="../customer?method=customerLogin";
     				}else
     					$(".link-login").text(data);
     			}
     		})
     	})
-        	$(function(){
-        		$.ajax({
-        			url:'../shopping?method=getInfo',
-   					success:function(data){
-   						var totalmoney=0;
-   						var productInfomation="";
-   							var productInfomation="";
-   		    				$.each(data,function(){
-   		    					var product=this.product;
-   		    					var money=parseFloat(product.price);
-   		    					var num=parseInt(this.productNum);
-   		    					var productInfo='<div class="L1" >'
-   		    					+	'<div style="padding:10px 12px 5px 12px;"> '
-   		                        +	'<font style="font-size: 14px;padding:10px 12px 10px 12px;font-size: 13px;font-weight: bold">商家：京东自营</font>'
-   		                    	+	'</div>'
-   		                    	+	'<div style="padding:5px 24px 5px 24px;">'
-   		                        +	'<font class="font1" style="padding:2px 6px 2px 6px;">换购</font>'
-   		                        +	'<font style="font-size: 14px;padding:10px 12px 10px 12px;font-size: 12px;font-weight: bold">'
-   		                        +  	' 已购满'+this.productNum+'件，您可以返回购物车加价换购商品'
-   		                        +	'</font>'
-   		                    	+	'</div>'
-   		                    	+	'<div style="padding:5px 24px 5px 24px;float: left">'
-   		                        +	'<img src="../upload/'+product.picurl+'" alt="">'
-   		                    	+	'</div>'
-   		                    	+	'<div style="padding:5px 0px 5px 0px;width: 40%;float: left">'
-   			                    +   '<a href="#" style="font-size: 13px;float: left; text-decoration:none;color:#8f8f8f;">'
-   			                    +    product.descInfo
-   			                    +    '</a><br><br><br>'
-   			                    +    '<font style="font-size: 12px;color: blue"> 支持七天无理由退货 </font>'
-   			                    +	'</div>'
-   			                    +	'<div style="padding:5px 0px 5px 10px;width: 30%;float: left">'
-   			                    +    '<font style="font-size: 12px;color: crimson;font-weight: bold;">'+product.price+'元</font>&nbsp;&nbsp;&nbsp;&nbsp;'
-   			                    +    '<font style="font-size: 12px;">X'+this.productNum+'</font>&nbsp;&nbsp;&nbsp;&nbsp;'
-   			                    +    '<font style="font-size: 12px;">有货</font ><br>&nbsp;&nbsp;&nbsp;&nbsp;'
-   			                    +    '<font style="font-size: 12px;">0.200kg</font>'
-   			                    +	'</div>'
-   			    	        	+   '</div>';
-   		    					productInfomation+=productInfo;
-   		    					totalmoney+=num*money;
-	   						})
-	   					$("#right").html(productInfomation);
-	   					$(".totalmoney").text(totalmoney);
-	        		}
-	        	})
-        	})
-            $(function(){
-                $(".addAddr").click(function(){
-                    $(".addAddress").fadeIn(200);
-                    $(".bg").fadeIn(200);
-                })
-                
-                $(".saveAddress").click(function(){
-                	$(".addAddress").find("input").eq(0).val();
-                    $(".addAddress").fadeOut(200);
-                    $(".bg").fadeOut(200);
-                })
-                
-                $(".cancel").click(function(){
-                	$(".addAddress").find("input").eq(0).val();
-                    $(".addAddress").fadeOut(200);
-                    $(".bg").fadeOut(200);
-                })
+       	$(function(){
+       		$.ajax({
+       			url:'../shopping?method=getInfo',
+  					success:function(data){
+  						var totalmoney=0;
+  						var productInfomation="";
+  						var productInfomation="";
+  		    			$.each(data,function(){
+  		    				var product=this.product;
+  		    				var money=parseFloat(product.price);
+  		    				var num=parseInt(this.productNum);
+  		    				var productInfo='<div class="L1" >'
+  		    				+	'<div style="padding:10px 12px 5px 12px;"> '
+  		                    +	'<font style="font-size: 14px;padding:10px 12px 10px 12px;font-size: 13px;font-weight: bold">商家：京东自营</font>'
+  		                    +	'</div>'
+	                    	+	'<div style="padding:5px 24px 5px 24px;">'
+	                        +	'<font class="font1" style="padding:2px 6px 2px 6px;">换购</font>'
+	                        +	'<font style="font-size: 14px;padding:10px 12px 10px 12px;font-size: 12px;font-weight: bold">'
+	                        +  	' 已购满'+this.productNum+'件，您可以返回购物车加价换购商品'
+	                        +	'</font>'
+	                    	+	'</div>'
+	                    	+	'<div style="padding:5px 24px 5px 24px;float: left">'
+	                        +	'<img src="../upload/'+product.picurl+'" alt="">'
+	                    	+	'</div>'
+	                    	+	'<div style="padding:5px 0px 5px 0px;width: 40%;float: left">'
+		                    +   '<a href="#" style="font-size: 13px;float: left; text-decoration:none;color:#8f8f8f;">'
+		                    +    product.descInfo
+		                    +    '</a><br><br><br>'
+		                    +    '<font style="font-size: 12px;color: blue"> 支持七天无理由退货 </font>'
+		                    +	'</div>'
+		                    +	'<div style="padding:5px 0px 5px 10px;width: 30%;float: left">'
+		                    +    '<font style="font-size: 12px;color: crimson;font-weight: bold;">'+product.price+'元</font>&nbsp;&nbsp;&nbsp;&nbsp;'
+		                    +    '<font style="font-size: 12px;">X'+this.productNum+'</font>&nbsp;&nbsp;&nbsp;&nbsp;'
+		                    +    '<font style="font-size: 12px;">有货</font ><br>&nbsp;&nbsp;&nbsp;&nbsp;'
+		                    +    '<font style="font-size: 12px;">0.200kg</font>'
+		                    +	'</div>'
+		    	        	+   '</div>';
+	    					productInfomation+=productInfo;
+	    					totalmoney+=num*money;
+	    					
+	   					})
+	   				$("#right").html(productInfomation);
+	   				$(".totalmoney").text(totalmoney);
+	   				$(".totalmoney1").text(totalmoney);
+	        	}
+	        })
+	    })
+        $(function(){
+        	var flag=1;
+            $(".addAddr").click(function(){
+                $(".addAddress").fadeIn(200);
+                $(".bg").fadeIn(200);
+            })
+            
+            $(".saveAddress").click(function(){
+            	$(".addAddress").find("input").each(function(){
+            		if($(this).val()==""){
+            			flag=0;
+            			alert("请输入完整信息");
+            			return false;
+            		}
+            		else{
+            			flag=1;
+            		}
+            	})
+            	
+            	if(flag==1){
+	            	$(".addname").text($(".newName").val());  
+	            	$(".addname1").text($(".newName").val()); 
+	    			$(".addressInfo").text($(".newAddress-fisrt").val()+" "+$(".newAddress-last").val());
+	    			$(".add-postal-code").text($(".new-postal-code").val());
+	    			$(".addphone").text($(".newphone").val());
+	    			$(".addAddress").fadeOut(200);
+	                $(".bg").fadeOut(200);
+            	}
                 
             })
             
-            $(function(){
-            	$(".payfor").click(function(){
-            		window.location.href="../checkout/jdsyt.html";
-            		$.ajax({
-            			url:"../order?method=submitOrder",
-            			type:"POST",
-            			data:{"address":$(".addressInfo").text(),
-            				"ammount":$(".totalmoney").text(),
-            			},
-            			success:function(data){
-            				
-            			}
-            		})
-            	})
+            $(".cancel").click(function(){
+                $(".addAddress").fadeOut(200);
+                $(".bg").fadeOut(200);
             })
-           
-        </script>
-        <style>
-        .payfor{
-        	margin-left:800px;
-        	width:200px;
-        	height:50px;
-        	background:red;
-        	color:white;
-        	font-size:18px;
-        	font-width:500;
-        	border:1px solid red;
-        	
-        }
+            
+        })
+            
+        $(function(){
+        	$(".payfor").click(function(){
+        		
+        		$.ajax({
+        			url:"../order?method=submitOrder",
+        			type:"POST",
+        			dataType:"text",
+        			data:{"address":$(".addressInfo").text(),
+        				"ammount":$(".totalmoney").text(),
+        			},
+        			success:function(data){
+        				if(data=="1"){
+        					alert("提交成功");
+        					window.localStorage.setItem("totalmoney",$(".totalmoney").text());
+        					window.location.href="../checkout/jdsyt.html";
+        				}
+        			}
+        		})
+        	})
+        })
+</script>
+	    <style>
+	    .payfor{
+	    	margin-left:800px;
+	    	width:200px;
+	    	height:50px;
+	    	background:red;
+	    	color:white;
+	    	font-size:18px;
+	    	font-width:500;
+	    	border:1px solid red;
+	    	
+	    }
             #top{
                 width: 100%;height: 30px;
                 background-color: rgb(201, 201, 201);
@@ -318,13 +341,13 @@
                     <div style="clear: both"></div><br>
                     <div class="receiver">
                         <div style="float: left">
-                            <font style="padding:3px 30px 3px 30px;font-size: 12px;border: 2px solid red">
+                            <font class="addname1" style="padding:3px 30px 3px 30px;font-size: 12px;border: 2px solid red">
                                 张三
                             </font>&nbsp;
-                            <font style="font-size: 12px;">张三</font>&nbsp;&nbsp;
+                            <font style="font-size: 12px;" class="addname">张三</font>&nbsp;&nbsp;
                             <font style="font-size: 12px;" class="addressInfo">广西 桂林市 灵川县 灵川镇 灵田乡东田村桂林电子科技大学(花江校区）</font> &nbsp;&nbsp;
-                            <font style="font-size: 12px;">123456</font>&nbsp;&nbsp;
-                            <font style="font-size: 12px;">默认地址</font>
+                            <font style="font-size: 12px;" class="add-postal-code">123456</font>&nbsp;&nbsp;
+                            <font style="font-size: 12px;" class="add-phone">13387725512</font>
                         </div>
                         <li style="padding:3px 30px 3px 30px;list-style:none;">
                             <a href="#" style="font-size: 12px;float: right;text-decoration:none;color:rgb(34, 85, 255);">
@@ -455,7 +478,7 @@
                         <font style="font-size: 12px;">
                            总商品金额：
                         </font>&nbsp;&nbsp;&nbsp;&nbsp; 
-                        <font class='totalmoney' style="font-size: 12px;">
+                        <font class='totalmoney1' style="font-size: 12px;">
                             ￥2999.00
                         </font><br> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <font style="font-size: 12px;">
@@ -492,11 +515,11 @@
 
         <div class="addAddress">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;新增收货地址</br><br><br>
-                所在地区&nbsp;&nbsp;&nbsp;<input type="text"></br></br>
-                收 货 人&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"></br></br>
-                详细地址&nbsp;&nbsp;&nbsp;<input type="text"></br></br>
-                手机号码&nbsp;&nbsp;&nbsp;<input type="text"></br></br>
-                邮政编码&nbsp;&nbsp;&nbsp;<input type="text"></br></br>
+                所在地区&nbsp;&nbsp;&nbsp;<input type="text" class="newAddress-fisrt"></br></br>
+                收 货 人&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="newName"></br></br>
+                详细地址&nbsp;&nbsp;&nbsp;<input type="text" class="newAddress-last"></br></br>
+                手机号码&nbsp;&nbsp;&nbsp;<input type="text" class="newphone"></br></br>
+                邮政编码&nbsp;&nbsp;&nbsp;<input type="text" class="new-postal-code"></br></br>
             </br>
             </br>
             </br>

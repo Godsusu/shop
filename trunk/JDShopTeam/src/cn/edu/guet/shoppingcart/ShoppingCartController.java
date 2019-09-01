@@ -100,6 +100,7 @@ public class ShoppingCartController extends BaseServlet {
     	shoppingCart.setIschoose("true");
     	IShoppingCartService shoppingcartService=(IShoppingCartService) BeanFactory.getInstance().getBean("shoppingCartService");
     	shoppingcartService.updataShoppingCart(shoppingCart);
+    	
     }
 	
     public void getInfo(HttpServletRequest request, HttpServletResponse response){

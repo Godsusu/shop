@@ -5,6 +5,30 @@
 	<title>收银台</title>
 	<link rel="icon" href="img/favicon.ico">
 	<link rel="stylesheet" href="css/sy.css">
+	<script src="../js/jquery-3.3.1.js"></script>
+	<script>
+		$(function(){
+			var totalmoney=window.localStorage.getItem("totalmoney");
+			$(".o-price").find("strong").text(totalmoney);
+			$(".p-e").each(function(){
+				$(this).find("strong").text(totalmoney);
+			});
+			$(".b-e").find("strong").text(totalmoney);
+		})
+		$(function(){
+    		$.ajax({
+    			url:"../customer?method=getUserName",
+    			dataType:"json",
+    			success:function(data){
+    				if(data==null){
+    					window.location.href="../customer?method=customerLogin";
+    				}else
+    					$(".link-login").text(data);
+    			}
+    		})
+    	})
+	</script>
+	
 </head>
 <body>
 		<div id="top">
@@ -14,7 +38,7 @@
 
 				</a>
 				<ul class="s-right">
-					<li class="s-item"><a href="#">jd_4958e21568eb7</a></li>
+					<li class="s-item"><a href="#" class="link-login"></a></li>
 					<li class="s-d">|</li>
 					<li class="s-item"><a href="#">我的订单</a></li>
 					<li class="s-d">|</li>
