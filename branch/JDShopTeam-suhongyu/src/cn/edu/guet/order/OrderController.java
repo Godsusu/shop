@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.lanqiao.util.ProductModel;
 import org.lanqiao.util.UUIDString;
 
+import com.alibaba.fastjson.JSON;
 
 import cn.edu.guet.ioc.BeanFactory;
 import cn.edu.guet.orderproduct.IOrderProductService;
@@ -28,6 +29,7 @@ import cn.edu.guet.web.servlet.base.BaseServlet;
 public class OrderController extends BaseServlet {
 	
 	public void submitOrder(HttpServletRequest request, HttpServletResponse response){
+		response.setContentType("plain/text;charset=gbk");
 		try {
 			String orderId=UUID.randomUUID().toString().replace("-","");
 			String address=request.getParameter("address");
@@ -40,33 +42,13 @@ public class OrderController extends BaseServlet {
 			order.setOrderId(orderId);
 			order.setCustomerId(customerId);
 			order.setAmmount(Float.valueOf(ammount));
-			System.out.println(Float.valueOf(ammount));
-			
 			order.setStatus(status);
 			order.setBuyerInfo(address);
-			/*Date day=new Date();
-			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			String data=sdf.format(day);*/
-			System.out.println(new java.sql.Date(System.currentTimeMillis()));
 			order.setOrderDate(new java.sql.Date(System.currentTimeMillis()));
 			order.setCashInfo(cashInfo);
 			IOrderService orderService=new OrderServiceImpl();
-			orderService.saveOrder(order);
+			orderService.saveOrder(order,customerId);
 			
-			
-			IShoppingCartService shoppingcartService=(IShoppingCartService) BeanFactory.getInstance().getBean("shoppingCartService");
-			List<ShoppingCart> list = shoppingcartService.getAllOrder(customerId);
-			
-			Iterator<ShoppingCart> iter=list.iterator();
-			IOrderProductService orderProductService=new OrderProductServiceImpl();
-			while(iter.hasNext()){
-				ShoppingCart shopping=new ShoppingCart();
-				OrderProduct orderProduct=new OrderProduct();
-				orderProduct.setOrderProductId(UUIDString.getId());
-				orderProduct.setOrderId(orderId);
-				orderProduct.setProductId(shopping.getProductid());
-				//orderProductService.save(orderProduct);
-			}
 			PrintWriter out=response.getWriter();
 			out.write("1");
 			out.flush();
@@ -74,7 +56,6 @@ public class OrderController extends BaseServlet {
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

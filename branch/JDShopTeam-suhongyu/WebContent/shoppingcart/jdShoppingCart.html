@@ -12,7 +12,7 @@
 			dataType:"json",
 			success:function(data){
 				if(data==null){
-					
+					window.location.href="../customer?method=customerLogin";
 				}else
 					$(".link-login").text(data);
 			}
@@ -113,7 +113,7 @@
     
       <div id="shoppingcart2">
           <div id="product">            
-            <img src="image/product.jpg" width="100" height="110" id="productpic">
+            <img src="" width="100" height="110" id="productpic">
             <form>
                 <li><a class="number" href="#"></a></li>
                 <li><a class="info" href="javascript:void(0)"></a></li>
